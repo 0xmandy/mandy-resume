@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>赵千慧 Mandy Zhao — 投研 AI 系统 · FDE 金融方向</title>
+<meta name="description" content="赵千慧 Mandy Zhao — 中国注册会计师 · 前普华永道 · 前私募投研，投研 AI 系统搭建与 AI 工作流交付作品集">
+<style>
+  :root {
+    --ink: #111;
+    --sub: #555;
+    --faint: #888;
+    --line: #e5e5e5;
+    --bg: #fff;
+    --chip-bg: #f4f4f4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.75;
+    font-size: 16px;
+  }
+  /* ---- bilingual toggle ---- */
+  body.lang-zh .en { display: none; }
+  body.lang-en .zh { display: none; }
+  body.lang-en { line-height: 1.6; }
+
+  .wrap { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---- nav ---- */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: 780px; margin: 0 auto; padding: 12px 24px;
+    display: flex; align-items: center; gap: 20px;
+    font-size: 14px;
+  }
+  .nav-inner a { color: var(--sub); text-decoration: none; }
+  .nav-inner a:hover { color: var(--ink); }
+  .nav-name { font-weight: 700; color: var(--ink) !important; margin-right: auto; }
+  #langBtn {
+    border: 1px solid var(--ink); background: none; cursor: pointer;
+    font-size: 13px; padding: 2px 10px; border-radius: 999px;
+    font-family: inherit; color: var(--ink);
+  }
+  #langBtn:hover { background: var(--ink); color: #fff; }
+
+  /* ---- hero ---- */
+  header.hero { padding: 72px 0 48px; border-bottom: 1px solid var(--line); }
+  .hero h1 { font-size: 34px; letter-spacing: .5px; line-height: 1.3; }
+  .hero .role { font-size: 17px; color: var(--sub); margin-top: 6px; }
+  .hero .hook { margin-top: 28px; font-size: 21px; font-weight: 650; line-height: 1.5; max-width: 620px; }
+  .hero .lines { margin-top: 18px; max-width: 620px; }
+  .hero .lines p { margin-top: 6px; font-size: 15.5px; color: var(--sub); }
+  .hero .lines p strong { color: var(--ink); font-weight: 600; }
+  .contact { margin-top: 24px; font-size: 14px; color: var(--sub); display: flex; flex-wrap: wrap; gap: 8px 18px; }
+  .contact a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
+  .contact a:hover { border-bottom-color: var(--ink); }
+
+  /* ---- sections ---- */
+  section { padding: 56px 0; border-bottom: 1px solid var(--line); }
+  h2 { font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--faint); margin-bottom: 28px; }
+
+  /* ---- skills ---- */
+  .skill-group { display: flex; gap: 16px; margin-bottom: 18px; align-items: baseline; }
+  .skill-label { flex: 0 0 150px; font-size: 14px; font-weight: 600; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-size: 13px; background: var(--chip-bg); border-radius: 999px;
+    padding: 3px 12px; color: var(--ink); white-space: nowrap;
+  }
+
+  /* ---- portfolio ---- */
+  .portfolio-note {
+    font-size: 14.5px; color: var(--sub); font-style: normal;
+    border-left: 3px solid var(--ink); padding: 4px 0 4px 16px; margin-bottom: 40px;
+  }
+  .case { margin-bottom: 48px; }
+  .case:last-child { margin-bottom: 0; }
+  .case-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .case-num { font-size: 13px; color: var(--faint); font-variant-numeric: tabular-nums; letter-spacing: 1px; }
+  .case-date { font-size: 13px; color: var(--faint); }
+  .case-cat { font-size: 12px; color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 1px 10px; }
+  .case h3 { font-size: 20px; margin-top: 6px; line-height: 1.45; }
+  .case h3 .metric { color: var(--sub); font-weight: 400; }
+  .case dl { margin-top: 14px; }
+  .case dt {
+    font-size: 12.5px; font-weight: 700; letter-spacing: 1.5px; color: var(--faint);
+    margin-top: 14px;
+  }
+  .case dd { margin-top: 2px; font-size: 15px; }
+  .case .tags { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .case .reports { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 10px 22px; }
+  .case .reports a {
+    font-size: 14.5px; color: var(--ink); text-decoration: none;
+    border-bottom: 1px solid var(--ink); padding-bottom: 1px;
+  }
+  .case .reports a:hover { color: var(--sub); border-bottom-color: var(--sub); }
+  .case .reports a .arrow { color: var(--faint); font-size: 12px; }
+
+  /* ---- experience timeline ---- */
+  .job { display: flex; gap: 24px; padding: 20px 0; border-top: 1px solid var(--line); }
+  .job:first-of-type { border-top: none; padding-top: 0; }
+  .job-date { flex: 0 0 150px; font-size: 13.5px; color: var(--faint); font-variant-numeric: tabular-nums; padding-top: 3px; }
+  .job-body h3 { font-size: 16.5px; }
+  .job-body .org { font-size: 14px; color: var(--sub); }
+  .job-body ul { margin-top: 8px; padding-left: 18px; font-size: 14.5px; color: var(--ink); }
+  .job-body li { margin-top: 4px; }
+
+  /* ---- education ---- */
+  .edu { font-size: 15px; margin-top: 8px; display: flex; gap: 16px; }
+  .edu .date { flex: 0 0 150px; font-size: 13.5px; color: var(--faint); padding-top: 2px; font-variant-numeric: tabular-nums; }
+
+  /* ---- footer ---- */
+  footer { padding: 56px 0 72px; }
+  footer .contact { margin-top: 12px; }
+  footer .fin { margin-top: 32px; font-size: 12.5px; color: var(--faint); }
+
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 27px; }
+    .skill-group { flex-direction: column; gap: 6px; }
+    .skill-label { flex: none; }
+    .job { flex-direction: column; gap: 4px; }
+    .job-date, .edu .date { flex: none; }
+    .edu { flex-direction: column; gap: 2px; }
+    .nav-inner { gap: 12px; font-size: 13px; overflow-x: auto; }
+  }
+</style>
+</head>
+<body class="lang-zh">
+
+<nav>
+  <div class="nav-inner">
+    <a href="#top" class="nav-name">Mandy Zhao</a>
+    <a href="#portfolio"><span class="zh">作品集</span><span class="en">Portfolio</span></a>
+    <a href="#skills"><span class="zh">技能</span><span class="en">Skills</span></a>
+    <a href="#experience"><span class="zh">经历</span><span class="en">Experience</span></a>
+    <a href="#contact"><span class="zh">联系</span><span class="en">Contact</span></a>
+    <button id="langBtn" onclick="toggleLang()">EN</button>
+  </div>
+</nav>
+
+<div class="wrap" id="top">
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <h1><span class="zh">赵千慧</span><span class="en">Mandy Zhao</span> <span style="color:var(--faint);font-weight:400"><span class="zh">Mandy Zhao</span><span class="en">(Qianhui)</span></span></h1>
+    <p class="role">
+      <span class="zh">投研 AI 系统搭建 · FDE 金融方向&ensp;|&ensp;中国注册会计师 · 前普华永道 · 前私募投研</span>
+      <span class="en">AI Research Systems · Forward Deployed Engineering (Finance)&ensp;|&ensp;CPA · ex-PwC · ex-PE</span>
+    </p>
+    <p class="hook">
+      <span class="zh">把混乱但高价值的业务问题，<br>变成可靠、可审计的 AI 工作流。</span>
+      <span class="en">I turn messy, high-value business problems<br>into reliable, auditable AI workflows.</span>
+    </p>
+    <div class="lines">
+      <p>
+        <span class="zh"><strong>稀缺组合</strong>：金融领域专业 × 审计合规背景 × 亲手搭建 LLM / RAG 工作流——三样很少出现在同一个人身上。</span>
+        <span class="en"><strong>A rare combination</strong>: financial domain expertise × audit &amp; compliance background × hands-on LLM / RAG workflow building — three things that rarely coexist in one person.</span>
+      </p>
+      <p>
+        <span class="zh"><strong>擅长场景</strong>：金融、医疗、专业服务等强监管行业的企业客户——每个数字都要有出处，每一步都经得起审计。近半年的交付案例往下翻。</span>
+        <span class="en"><strong>Where I work best</strong>: enterprise customers in regulated industries — finance, healthcare, professional services — where every number needs a source and every step must survive an audit. Recent deliverables below.</span>
+      </p>
+      <p>
+        <span class="zh"><strong>下一步</strong>：在金融机构搭投研 AI 系统，或做金融方向的 FDE。</span>
+        <span class="en"><strong>Next</strong>: building AI research systems inside a financial institution, or forward-deployed engineering for finance.</span>
+      </p>
+    </div>
+    <div class="contact">
+      <span><span class="zh">上海</span><span class="en">Shanghai</span></span>
+      <a class="email-link" data-u="zhaoqianhuihz" data-d="163.com" href="#">zhaoqianhuihz (at) 163 (dot) com</a>
+      <a href="https://github.com/0xmandy" target="_blank" rel="noopener">github.com/0xmandy</a>
+    </div>
+  </header>
+
+  <!-- ================= PORTFOLIO ================= -->
+  <section id="portfolio">
+    <h2><span class="zh">作品集 · 案例研究</span><span class="en">Portfolio · Case Studies</span></h2>
+
+    <p class="portfolio-note">
+      <span class="zh">这些项目按时间排，跨度差不多半年。AI 工具变化太快——每个案例里的组合，都是当月我跑通、用熟、能交付的选型。换个时间点再做，我会换一套。这正是这份工作有意思的地方。</span>
+      <span class="en">These projects span roughly six months, in chronological order. AI tooling moves fast — the stack in each case is what I had running, mastered, and could deliver with that month. Redo any of them today and I'd pick a different combination. That's exactly what makes this work interesting.</span>
+    </p>
+
+    <!-- Case 01: 贵金属监控 -->
+    <article class="case">
+      <div class="case-head">
+        <span class="case-num">01</span>
+        <span class="case-date">2026.02 · <span class="zh">个人项目</span><span class="en">Personal Project</span></span>
+        <span class="case-cat"><span class="zh">行情 · 自动化</span><span class="en">Markets · Automation</span></span>
+      </div>
+      <h3>
+        <span class="zh">黄金白银价格监控 <span class="metric">— Telegram 全自动推送</span></span>
+        <span class="en">Gold &amp; Silver Price Monitor <span class="metric">— fully automated Telegram alerts</span></span>
+      </h3>
+      <dl>
+        <dt><span class="zh">背景</span><span class="en">BACKGROUND</span></dt>
+        <dd>
+          <span class="zh">贵金属价格波动剧烈，人工盯盘既耗时又容易漏掉关键时点，需要一个 7×24 无人值守的价格监控。</span>
+          <span class="en">Precious-metal prices swing hard; watching quotes manually is time-consuming and misses key moments. I needed 24/7 unattended price monitoring.</span>
+        </dd>
+        <dt><span class="zh">挑战</span><span class="en">CHALLENGE</span></dt>
+        <dd>
+          <span class="zh">免费行情源的稳定性与反爬限制；告警规则要过滤噪音、避免重复轰炸；脚本要在远程服务器上长期稳定自跑。</span>
+          <span class="en">Free market-data sources are unstable and rate-limited; alert rules had to filter noise and avoid duplicate spam; the script had to run unattended on a remote server for the long term.</span>
+        </dd>
+        <dt><span class="zh">方案</span><span class="en">SOLUTION</span></dt>
+        <dd>
+          <span class="zh">Python 脚本定时轮询行情源，按价格阈值与波动幅度触发告警，经 Telegram Bot 推送到手机；部署在境外 VPS 上由 cron 定时驱动，token 等敏感配置全部走环境变量。</span>
+          <span class="en">A Python script polls market-data sources on schedule, triggers alerts on price thresholds and swing magnitude, and pushes to my phone via a Telegram bot; deployed on an overseas VPS driven by cron, with all tokens kept in environment variables.</span>
+        </dd>
+        <dt><span class="zh">价值</span><span class="en">IMPACT</span></dt>
+        <dd>
+          <span class="zh">把「主动盯盘」变成「被动接收」：关键波动第一时间到手机，零人工值守。</span>
+          <span class="en">Turned "actively watching quotes" into "passively receiving alerts": key moves reach my phone instantly, with zero human babysitting.</span>
+        </dd>
+      </dl>
+      <div class="tags">
+        <span class="chip">Python</span>
+        <span class="chip">Telegram Bot API</span>
+        <span class="chip">cron / VPS</span>
+      </div>
+    </article>
+
+    <!-- Case 02: 财报 RAG / A股研究系统 -->
+    <article class="case">
+      <div class="case-head">
+        <span class="case-num">02</span>
+        <span class="case-date">2026.04 – <span class="zh">至今</span><span class="en">Present</span> · <span class="zh">个人项目</span><span class="en">Personal Project</span></span>
+        <span class="case-cat"><span class="zh">金融 · RAG</span><span class="en">Finance · RAG</span></span>
+      </div>
+      <h3>
+        <span class="zh">A股基本面研究系统 <span class="metric">— 财报提取 RAG + 多 Agent 管线</span></span>
+        <span class="en">A-Share Fundamental Research System <span class="metric">— financial-report RAG + multi-agent pipeline</span></span>
+      </h3>
+      <dl>
+        <dt><span class="zh">背景</span><span class="en">BACKGROUND</span></dt>
+        <dd>
+          <span class="zh">A股年报、招股书动辄数百页，人工找口径、对齐同业极其耗时；而直接「跟 AI 聊」得到的数字不可信——投研场景里每个数字都必须可溯源到原始文件。</span>
+          <span class="en">A-share annual reports and prospectuses run hundreds of pages; manually locating figures and aligning peer comparisons is painfully slow. And numbers from "just chatting with AI" can't be trusted — in investment research, every figure must trace back to the source document.</span>
+        </dd>
+        <dt><span class="zh">挑战</span><span class="en">CHALLENGE</span></dt>
+        <dd>
+          <span class="zh">第一手信源纪律（招股书 / 年报 / 公告为据）；同口径的同业对比；数字可回溯；研究过程要沉淀成可复用的流水线，而不是一次性对话。</span>
+          <span class="en">First-hand-source discipline (prospectuses / annual reports / filings only); peer comparisons on consistent definitions; traceable numbers; and a research process that compounds into a reusable pipeline instead of one-off conversations.</span>
+        </dd>
+        <dt><span class="zh">方案</span><span class="en">SOLUTION</span></dt>
+        <dd>
+          <span class="zh">「文件系统即真理」的研究仓库 + 固定 10 问的买方级事实底稿框架；LangGraph 多 Agent 管线分工——确定性工具负责取数与量化计算，LLM Agent 负责撰写，条件边把不合格的稿件打回重写；Streamlit dashboard 公网部署，Telegram 推送兜底。</span>
+          <span class="en">A "filesystem as source of truth" research repo plus a fixed 10-question buy-side fact-sheet framework; a LangGraph multi-agent pipeline with clear separation — deterministic tools handle data retrieval and quantitative computation, LLM agents handle drafting, and conditional edges send substandard drafts back for rewrite; a Streamlit dashboard deployed publicly, with Telegram push as backup.</span>
+        </dd>
+        <dt><span class="zh">价值</span><span class="en">IMPACT</span></dt>
+        <dd>
+          <span class="zh">落地两份完整个股事实底稿（迈威生物 688062、嘉友国际 603871），每个结论附第一手出处；管线复用后，新增覆盖标的只需替换输入。</span>
+          <span class="en">Shipped two complete single-stock fact sheets (Mabwell 688062, Jiayou International 603871), every conclusion backed by a first-hand citation; with the pipeline in place, covering a new company only requires swapping the inputs.</span>
+        </dd>
+      </dl>
+      <div class="tags">
+        <span class="chip">LangGraph</span>
+        <span class="chip">Claude Code</span>
+        <span class="chip">RAG</span>
+        <span class="chip">Streamlit</span>
+        <span class="chip">akshare</span>
+      </div>
+    </article>
+
+    <!-- Case 03: 机器人产业知识图谱 -->
+    <article class="case">
+      <div class="case-head">
+        <span class="case-num">03</span>
+        <span class="case-date">2026.06 – <span class="zh">至今</span><span class="en">Present</span> · <span class="zh">个人项目</span><span class="en">Personal Project</span></span>
+        <span class="case-cat"><span class="zh">行业研究 · 具身智能</span><span class="en">Industry Research · Embodied AI</span></span>
+      </div>
+      <h3>
+        <span class="zh">机器人产业知识图谱 <span class="metric">— 已发布 8 篇 HTML 研究合集</span></span>
+        <span class="en">Robotics Industry Knowledge Atlas <span class="metric">— 8 published HTML research pieces</span></span>
+      </h3>
+      <dl>
+        <dt><span class="zh">背景</span><span class="en">BACKGROUND</span></dt>
+        <dd>
+          <span class="zh">具身智能是资本最热的赛道之一，但公开讨论充斥二手转述和情绪叙事。我要用基本面研究的方法论，做一套从术语、发展史到文献奠基人、月度跟踪的产业链知识库。</span>
+          <span class="en">Embodied AI is one of the hottest sectors in venture capital, yet public discussion is full of second-hand retellings and hype. I set out to apply fundamental-research methodology to build an industry knowledge base spanning terminology, category histories, foundational literature, and monthly tracking.</span>
+        </dd>
+        <dt><span class="zh">挑战</span><span class="en">CHALLENGE</span></dt>
+        <dd>
+          <span class="zh">跨机械、感知、AI 多学科的术语门槛；历史叙事容易被后见之明扭曲，必须回到当年的一手材料；每个商业化判断都要能被反例证伪，而不是讲故事。</span>
+          <span class="en">Terminology cuts across mechanics, perception, and AI; historical narratives get distorted by hindsight, so claims must trace back to primary materials from the time; and every commercialization judgment has to survive falsification against counterexamples — not just tell a good story.</span>
+        </dd>
+        <dt><span class="zh">方案</span><span class="en">SOLUTION</span></dt>
+        <dd>
+          <span class="zh">三条纪律贯穿全站：第一手信源为据、结构化框架、不确定处诚实标注。用「术语拟人图鉴」降低阅读门槛，用清洁机器人等已跑完商业化周期的品类做参照系，提炼出品类商业化的两条件判断框架，并用割草机器人等品类回测证伪。AI 负责检索与核验加速，结论由人工把关。</span>
+          <span class="en">Three disciplines run through the whole site: first-hand sources only, structured frameworks, and honest flagging of uncertainty. A "personified terminology field guide" lowers the reading barrier; categories that have completed their commercialization cycle (e.g. cleaning robots) serve as reference systems, distilled into a two-condition framework for category commercialization — back-tested for falsification against categories like robotic lawn mowers. AI accelerates retrieval and verification; conclusions stay human-vetted.</span>
+        </dd>
+        <dt><span class="zh">价值</span><span class="en">IMPACT</span></dt>
+        <dd>
+          <span class="zh">已发布 8 篇 HTML 研究作品，形成可复用的品类商业化分析框架；同一套「信源纪律 + AI 加速」的工作流，可以迁移到任何硬科技赛道的尽调与行业研究。</span>
+          <span class="en">Eight HTML research pieces published, plus a reusable framework for analyzing category commercialization; the same "source discipline + AI acceleration" workflow transfers to due diligence and industry research in any hard-tech sector.</span>
+        </dd>
+      </dl>
+      <div class="tags">
+        <span class="chip"><span class="zh">行业研究</span><span class="en">Industry Research</span></span>
+        <span class="chip"><span class="zh">一手信源核验</span><span class="en">Primary-Source Verification</span></span>
+        <span class="chip">Claude Code</span>
+        <span class="chip"><span class="zh">数据可视化</span><span class="en">Data Visualization</span></span>
+      </div>
+    </article>
+
+    <!-- Case 04: 买方深度研究 万华 / 嘉友 -->
+    <article class="case">
+      <div class="case-head">
+        <span class="case-num">04</span>
+        <span class="case-date">2026.07 · <span class="zh">个人项目</span><span class="en">Personal Project</span></span>
+        <span class="case-cat"><span class="zh">金融 · 基本面研究</span><span class="en">Finance · Fundamental Research</span></span>
+      </div>
+      <h3>
+        <span class="zh">两份买方级深度底稿 <span class="metric">— 万华化学 · 嘉友国际，可点开读全文</span></span>
+        <span class="en">Two Buy-Side Deep-Dive Reports <span class="metric">— Wanhua Chemical &amp; Jiayou International, full text online</span></span>
+      </h3>
+      <dl>
+        <dt><span class="zh">背景</span><span class="en">BACKGROUND</span></dt>
+        <dd>
+          <span class="zh">光说搭了个研究系统没有说服力，真正能被翻开、被追问的是系统跑出来的完整报告。我挑了两家生意模式截然不同的 A股公司来验证方法论：万华化学（重资产化工制造）和嘉友国际（跨境物流服务）。</span>
+          <span class="en">"We built a research system" convinces no one on its own; what holds up to scrutiny is a full report the system produced. I picked two A-share companies with completely different business models to test the methodology: Wanhua Chemical (asset-heavy chemical manufacturing) and Jiayou International (cross-border logistics).</span>
+        </dd>
+        <dt><span class="zh">挑战</span><span class="en">CHALLENGE</span></dt>
+        <dd>
+          <span class="zh">两个行业的护城河逻辑毫不相通：化工拼的是成本曲线与投产节奏，物流拼的是通道控制与节点卡位。每个判断都得顶住反证——竞争者能否复制、政策生变会怎样、数字对不对得上年报口径。</span>
+          <span class="en">The two industries share no moat logic: chemicals compete on cost curves and capacity-ramp timing, logistics on corridor control and node positioning. Every judgment had to survive counter-evidence — can a rival replicate it, what if policy shifts, do the numbers reconcile to the annual report.</span>
+        </dd>
+        <dt><span class="zh">方案</span><span class="en">SOLUTION</span></dt>
+        <dd>
+          <span class="zh">同一套「固定 10 问 + 第一手信源纪律 + 反证清单」的框架分别落到两家公司。万华拆解了每一次投产究竟把哪项成本压下去的成本演化链条，并与 BASF、科思创、亨斯迈、陶氏做同口径对照；嘉友以铜带多走廊时代的节点价值重画竞争地图，配一张可交互货流地图，把公路、铁路、陆港的角色一次讲清。</span>
+          <span class="en">The same framework — a fixed 10 questions, first-hand-source discipline, and a falsification checklist — was applied to both. For Wanhua I traced the cost-evolution chain of exactly which cost each capacity expansion drove down, benchmarked on consistent definitions against BASF, Covestro, Huntsman, and Dow; for Jiayou I redrew the competitive map around node value in the copper-belt multi-corridor era, with an interactive cargo-flow map laying out the roles of road, rail, and dry ports at a glance.</span>
+        </dd>
+        <dt><span class="zh">价值</span><span class="en">IMPACT</span></dt>
+        <dd>
+          <span class="zh">两份完整买方底稿，每个结论都挂第一手出处（年报、招股书、公告、竞争对手 10-K）。同一框架不挑行业、可复用，是能沉淀下来的研究能力。</span>
+          <span class="en">Two complete buy-side fact sheets, every conclusion tied to a first-hand source (annual reports, prospectuses, filings, competitors' 10-Ks). The same framework is industry-agnostic and reusable — a research capability that compounds.</span>
+        </dd>
+      </dl>
+      <div class="reports">
+        <a href="reports/wanhua/moat.html" target="_blank" rel="noopener"><span class="zh">万华化学 · 低成本护城河</span><span class="en">Wanhua · Low-Cost Moat</span> <span class="arrow">↗</span></a>
+        <a href="reports/jiayou/forward-findings.html" target="_blank" rel="noopener"><span class="zh">嘉友国际 · 前瞻发现</span><span class="en">Jiayou · Forward Findings</span> <span class="arrow">↗</span></a>
+        <a href="reports/jiayou/cargo-flow-map.html" target="_blank" rel="noopener"><span class="zh">嘉友 · 可交互货流地图</span><span class="en">Jiayou · Interactive Cargo-Flow Map</span> <span class="arrow">↗</span></a>
+      </div>
+      <div class="tags">
+        <span class="chip"><span class="zh">基本面研究</span><span class="en">Fundamental Research</span></span>
+        <span class="chip"><span class="zh">一手信源核验</span><span class="en">Primary-Source Verification</span></span>
+        <span class="chip"><span class="zh">同口径对比</span><span class="en">Like-for-Like Benchmarking</span></span>
+        <span class="chip"><span class="zh">数据可视化</span><span class="en">Data Visualization</span></span>
+      </div>
+    </article>
+  </section>
+
+  <!-- ================= SKILLS ================= -->
+  <section id="skills">
+    <h2><span class="zh">核心技能</span><span class="en">Core Skills</span></h2>
+    <div class="skill-group">
+      <div class="skill-label"><span class="zh">AI 工程与交付</span><span class="en">AI Engineering &amp; Delivery</span></div>
+      <div class="chips">
+        <span class="chip">RAG</span>
+        <span class="chip">LangGraph</span>
+        <span class="chip"><span class="zh">多 Agent 管线</span><span class="en">Multi-Agent Pipelines</span></span>
+        <span class="chip">Workflow Orchestration</span>
+        <span class="chip">Claude Code / Codex</span>
+        <span class="chip">Python / SQL</span>
+        <span class="chip"><span class="zh">数据可视化</span><span class="en">Data Visualization</span></span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-label"><span class="zh">金融与投研</span><span class="en">Finance &amp; Research</span></div>
+      <div class="chips">
+        <span class="chip"><span class="zh">财务尽职调查（FDD）</span><span class="en">Financial Due Diligence</span></span>
+        <span class="chip"><span class="zh">买方投研 · 一手调研</span><span class="en">Buy-side Research · Field Work</span></span>
+        <span class="chip"><span class="zh">财务建模</span><span class="en">Financial Modeling</span></span>
+        <span class="chip"><span class="zh">法定与 IFRS 审计</span><span class="en">Statutory &amp; IFRS Audit</span></span>
+        <span class="chip"><span class="zh">合并报表</span><span class="en">Group Consolidation</span></span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-label"><span class="zh">专业证书</span><span class="en">Certification</span></div>
+      <div class="chips">
+        <span class="chip"><span class="zh">中国注册会计师（CICPA）</span><span class="en">CPA (China / CICPA)</span></span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-label"><span class="zh">语言</span><span class="en">Languages</span></div>
+      <div class="chips">
+        <span class="chip"><span class="zh">英语 · 雅思 7.5 / 专八</span><span class="en">English · IELTS 7.5 / TEM-8</span></span>
+        <span class="chip"><span class="zh">可对接海外客户 / 开发者</span><span class="en">Engages Overseas Clients / Developers</span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EXPERIENCE ================= -->
+  <section id="experience">
+    <h2><span class="zh">工作经历</span><span class="en">Experience</span></h2>
+
+    <div class="job">
+      <div class="job-date">2022.10 – <span class="zh">至今</span><span class="en">Present</span></div>
+      <div class="job-body">
+        <h3><span class="zh">独立投研与 AI 工作流交付</span><span class="en">Independent Research &amp; AI Workflow Delivery</span></h3>
+        <div class="org"><span class="zh">上海</span><span class="en">Shanghai</span></div>
+        <ul>
+          <li><span class="zh">AI 工作流真实交付：详见上方作品集三个案例。</span><span class="en">Shipped real AI-workflow deliverables — see the three case studies above.</span></li>
+          <li><span class="zh">在 48 小时黑客松中向开源具身智能项目 dimos 提交 PR，编程驱动宇树机器狗按思路运动。</span><span class="en">Contributed a PR to open-source embodied-AI project dimos at a 48-hour hackathon, programming a Unitree robot dog to move as designed.</span></li>
+          <li><span class="zh">深度参与开发者社区：mushanghai 共创者、seapunkclub 完整参与者；数据可视化比赛前三名（$1,000 奖金）。</span><span class="en">Active in developer communities: co-creator of mushanghai, sustained participant in seapunkclub; Top 3 (US$1,000 prize) in a data-visualization competition.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="job-date">2021.08 – 2022.09</div>
+      <div class="job-body">
+        <h3><span class="zh">投资分析师（买方私募）</span><span class="en">Investment Analyst (Buy-side PE)</span></h3>
+        <div class="org"><span class="zh">南京望岳投资有限公司</span><span class="en">Nanjing Wangyue Investment Co., Ltd.</span></div>
+        <ul>
+          <li><span class="zh">独立完成恒立液压（人形机器人滚珠丝杠供应链）实地工厂调研与研究报告。</span><span class="en">Independently led factory field research and a full report on Hengli Hydraulic (ball-screw supplier in the humanoid-robot supply chain).</span></li>
+          <li><span class="zh">美股消费金融科技买方投研；与被覆盖公司 IR 负责人直接对接，核实一手数据。</span><span class="en">Buy-side research on US-listed consumer fintech; worked directly with covered companies' IR leads to verify first-hand data.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="job-date">2020.04 – 2021.07</div>
+      <div class="job-body">
+        <h3><span class="zh">财务经理</span><span class="en">Finance Manager</span></h3>
+        <div class="org"><span class="zh">上海骊霄医疗技术有限公司</span><span class="en">Shanghai Lixiao Medical Technology Co., Ltd.</span></div>
+        <ul>
+          <li><span class="zh">作为投后对接人，按季度向机构投资人交付财务数据包。</span><span class="en">Post-investment liaison — delivered quarterly data packages to institutional investors.</span></li>
+          <li><span class="zh">从 0 到 1 搭建财务体系；作为被尽调方走完 A+ 轮普华永道财务尽调。</span><span class="en">Built the finance function from scratch; navigated the company's A+ round PwC FDD from the subject side.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="job-date">2015.10 – 2020.04</div>
+      <div class="job-body">
+        <h3><span class="zh">高级审计员</span><span class="en">Senior Auditor</span></h3>
+        <div class="org"><span class="zh">普华永道中天会计师事务所</span><span class="en">PricewaterhouseCoopers Zhongtian LLP</span></div>
+        <ul>
+          <li><span class="zh">跨境并购财务尽调（澳洲现场 2 周）：汤臣倍健收购澳洲益生菌企业、绿城收购澳洲幼儿园项目。</span><span class="en">Cross-border M&amp;A FDD (2 weeks on-site in Australia): BY-Health's probiotics acquisition and Greentown's kindergarten acquisition.</span></li>
+          <li><span class="zh">带领 5 人团队完成法国 500 强集团 4 家子公司法定审计；完成德国汽车零部件企业 IFRS 集团审计。</span><span class="en">Led a 5-person team auditing 4 subsidiaries of a French Fortune 500 group; delivered the IFRS group audit of a German automotive-components company.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EDUCATION ================= -->
+  <section id="education">
+    <h2><span class="zh">教育背景</span><span class="en">Education</span></h2>
+    <div class="edu">
+      <div class="date">2011 – 2015</div>
+      <div><span class="zh">华东政法大学 · 英语学士（前 10%）</span><span class="en">East China University of Political Science and Law · B.A. in English (Top 10%)</span></div>
+    </div>
+    <div class="edu">
+      <div class="date">2012 – 2015</div>
+      <div><span class="zh">上海对外经贸大学 · 会计学（双学位）</span><span class="en">Shanghai University of International Business and Economics · B.A. in Accounting (Dual Degree)</span></div>
+    </div>
+    <div class="edu">
+      <div class="date">2014.01 – 2014.06</div>
+      <div><span class="zh">英国曼彻斯特大学 · 交换项目</span><span class="en">University of Manchester, UK · Exchange Programme</span></div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER / CONTACT ================= -->
+  <footer id="contact">
+    <h2><span class="zh">联系方式</span><span class="en">Get in Touch</span></h2>
+    <p>
+      <span class="zh">如果你在金融机构搭建投研 AI 系统，或在招聘金融方向的 FDE / 解决方案工程师，欢迎联系。</span>
+      <span class="en">If you're building AI research systems at a financial institution, or hiring finance-focused Forward Deployed Engineers / solutions engineers, I'd love to hear from you.</span>
+    </p>
+    <div class="contact">
+      <span><span class="zh">上海</span><span class="en">Shanghai</span></span>
+      <a class="email-link" data-u="zhaoqianhuihz" data-d="163.com" href="#">zhaoqianhuihz (at) 163 (dot) com</a>
+      <a href="https://github.com/0xmandy" target="_blank" rel="noopener">github.com/0xmandy</a>
+    </div>
+    <p class="fin">© 2026 Mandy Zhao</p>
+  </footer>
+
+</div>
+
+<script>
+// 运行时拼接邮箱：静态源码不含明文地址，规避爬虫抓取
+document.querySelectorAll('.email-link').forEach(function (a) {
+  var addr = a.dataset.u + '@' + a.dataset.d;
+  a.href = 'mailto:' + addr;
+  a.textContent = addr;
+});
+
+function toggleLang() {
+  const body = document.body;
+  const btn = document.getElementById('langBtn');
+  if (body.classList.contains('lang-zh')) {
+    body.classList.replace('lang-zh', 'lang-en');
+    btn.textContent = '中';
+    document.documentElement.lang = 'en';
+  } else {
+    body.classList.replace('lang-en', 'lang-zh');
+    btn.textContent = 'EN';
+    document.documentElement.lang = 'zh-CN';
+  }
+}
+</script>
+</body>
+</html>

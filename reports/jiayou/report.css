@@ -1,0 +1,50 @@
+@page { size: A4; margin: 9mm 11mm 9mm; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif; font-size: 9.45pt; line-height: 1.34; color: #191919; background: #fff; }
+.page { break-after: page; position: relative; min-height: 278mm; }
+.page:last-child { break-after: auto; }
+h1 { font-size: 18pt; line-height: 1.12; letter-spacing: 0; margin: 0 0 1.4mm; color: #143f4b; }
+h2 { font-size: 10.4pt; line-height: 1.18; letter-spacing: 0; margin: 2.4mm 0 1mm; color: #175c6e; }
+p { margin: 0 0 1.5mm; }
+strong { color: #113f4a; }
+.kicker { font-size: 7.4pt; color: #666; margin-bottom: 2.2mm; }
+.deck { color: #4c4c4c; font-size: 9.6pt; border-bottom: .6pt solid #c9c5bb; padding-bottom: 2mm; margin-bottom: 2.7mm; }
+.thesis { border-top: 2.4pt solid #c28b18; border-bottom: .7pt solid #c9c2b1; padding: 2.4mm 0; margin-bottom: 2mm; font-size: 10.25pt; }
+.map { display: block; width: 100%; height: 100mm; object-fit: contain; margin: 0 0 2mm; }
+.hard-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3mm; break-inside: avoid; }
+.hard-facts > section { border-top: 1.7pt solid #2a7588; padding-top: 1.2mm; }
+.hard-facts h2 { margin-top: 0; }
+.evidence-chain { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.4mm; margin: 2.5mm 0 3mm; break-inside: avoid; }
+.evidence-chain > section { border-top: 1.3pt solid #789aa3; padding: 2.2mm 2mm; min-height: 38mm; background: #f7f8f6; }
+.evidence-chain span { font-size: 7pt; color: #a36d06; font-weight: 700; }
+.evidence-chain h2 { margin: .4mm 0 1mm; }
+.scenario-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3mm; margin: 3mm 0; break-inside: avoid; }
+.scenario-grid > section { border-left: 2.3pt solid #c28b18; padding: 1.4mm 0 1.4mm 2.8mm; min-height: 36mm; }
+.scenario-grid h2 { margin-top: 0; }
+.callout { border-left: 2.2pt solid #2a7588; padding: 2mm 0 2mm 3mm; margin-top: 2mm; }
+.falsification { border-left: 2.6pt solid #a64231; padding: 2.2mm 0 2.2mm 3mm; margin-top: 2.5mm; break-inside: avoid; }
+table { border-collapse: collapse; width: 100%; margin: 1.5mm 0 2mm; break-inside: avoid; }
+th, td { border-bottom: .5pt solid #c5c5c5; padding: 1.15mm 1mm; vertical-align: top; }
+th { text-align: left; color: #175c6e; font-size: 8.5pt; }
+ul { margin: 1mm 0 1.5mm; padding-left: 5mm; }
+li { margin: 0 0 .7mm; }
+footer.notes { border-top: .6pt solid #b8b8b8; margin-top: 2.5mm; padding-top: 1.5mm; font-size: 6.9pt; line-height: 1.22; color: #555; }
+footer.notes p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+
+/* ---- 屏幕阅读：把 A4 打印稿变成居中的纸张卡片，取消强制页高，打印时不生效 ---- */
+@media screen {
+  body { background: #ecece8; padding: 26px 12px; }
+  .page {
+    min-height: auto;
+    break-after: auto;
+    box-sizing: border-box;
+    max-width: 210mm;
+    margin: 0 auto 18px;
+    padding: 13mm 12mm 15mm;
+    background: #fff;
+    box-shadow: 0 1px 8px rgba(0,0,0,.13);
+    border-radius: 2px;
+  }
+}

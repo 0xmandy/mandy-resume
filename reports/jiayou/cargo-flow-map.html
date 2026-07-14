@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>嘉友国际 · 货流与角色地图（蒙古煤 / 非洲铜）</title>
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<style>
+  :root { --green:#1a7f37; --red:#c0392b; --orange:#e67e22; --grey:#7f8c8d; --blue:#2563eb; --ink:#1f2328; }
+  * { box-sizing:border-box; }
+  body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; margin:0; color:var(--ink); background:#fafafa; line-height:1.7; }
+  .wrap { max-width:1080px; margin:0 auto; padding:24px 20px 60px; }
+  h1 { font-size:26px; margin:8px 0 4px; }
+  h2 { font-size:20px; margin:36px 0 8px; border-left:4px solid var(--blue); padding-left:10px; }
+  .sub { color:#57606a; font-size:13px; margin-bottom:16px; }
+  .map { height:520px; border-radius:10px; border:1px solid #d0d7de; margin:12px 0 8px; }
+  .legend { display:flex; flex-wrap:wrap; gap:14px; font-size:13px; margin:6px 0 14px; }
+  .legend span { display:inline-flex; align-items:center; gap:6px; }
+  .sw { display:inline-block; width:26px; height:0; border-top:4px solid; border-radius:2px; }
+  .sw.dash { border-top-style:dashed; }
+  .dot { display:inline-block; width:12px; height:12px; border-radius:50%; border:2px solid #fff; box-shadow:0 0 0 1.5px rgba(0,0,0,.25); }
+  table { border-collapse:collapse; width:100%; font-size:13.5px; margin:10px 0; background:#fff; }
+  th,td { border:1px solid #d0d7de; padding:7px 10px; text-align:left; vertical-align:top; }
+  th { background:#f6f8fa; }
+  .note { background:#fff8e6; border:1px solid #f0d666; border-radius:8px; padding:12px 16px; font-size:13.5px; margin:14px 0; }
+  .fix  { background:#eef6ff; border:1px solid #a5c9f5; border-radius:8px; padding:12px 16px; font-size:13.5px; margin:14px 0; }
+  .tag { font-size:11px; padding:1px 6px; border-radius:10px; color:#fff; margin-right:4px; white-space:nowrap; }
+  .tg { background:var(--green);} .tr { background:var(--red);} .to { background:var(--orange);} .tn { background:var(--grey);}
+  .leaflet-popup-content { font-size:13px; line-height:1.5; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>嘉友国际（603871）· 货流与角色地图</h1>
+  <div class="sub">蒙古煤 + 非洲铜 · 数据基准 2025 年报及事实底稿（2026-07-10）· 坐标为示意精度，路线为概略连线，不代表实际道路走向 · 内部研究底稿</div>
+
+  <h2>① 蒙古侧：三口岸集水区与国能管道</h2>
+  <div class="legend">
+    <span><i class="dot" style="background:#1a7f37"></i>嘉友主场</span>
+    <span><i class="dot" style="background:#c0392b"></i>他人赚钱的口岸</span>
+    <span><i class="dot" style="background:#333"></i>矿区</span>
+    <span><i class="sw" style="border-color:#1a7f37"></i>嘉友参与的公路贸易流</span>
+    <span><i class="sw dash" style="border-color:#c0392b"></i>2027 国能铁路管道（嘉友无角色）</span>
+    <span><i class="sw" style="border-color:#2563eb"></i>策克集水区（不同煤田，非替代）</span>
+    <span><i class="sw dash" style="border-color:#e67e22"></i>满都拉备用通道（部分替代）</span>
+  </div>
+  <div id="mapMN" class="map"></div>
+
+  <table>
+    <tr><th>口岸对</th><th>蒙方集水区（矿主）</th><th>2025 过货</th><th>钱是谁赚的</th><th>与甘其毛都的关系</th></tr>
+    <tr><td>西伯库伦 ═ <b>策克</b>（阿拉善盟）</td><td>纳林苏海图煤田（MAK、南戈壁等）</td><td>3,214.8 万吨，+34.9%</td><td style="color:#c0392b">额济纳旗口岸平台、当地仓储物流、AGV 运营方——无嘉友</td><td><b>非替代</b>：另一个煤田自己放量</td></tr>
+    <tr><td>嘎顺苏海图 ═ <b>甘其毛都</b>（巴彦淖尔）</td><td>塔本陶勒盖 TT（ETT/MMC/小TT）</td><td>4,243.2 万吨，+3.7%（平台期）</td><td style="color:#1a7f37"><b>嘉友主场</b>：仓储/清关/散改集/代买；AGV=第三方淖尔宝慧(7.3%)；国能在建自有仓</td><td>—</td></tr>
+    <tr><td>杭吉 ═ <b>满都拉</b>（包头）</td><td>TT 及东部矿（宗巴音方向🟡）</td><td>前4月 +43%（体量最小）</td><td style="color:#c0392b">包头/达茂旗平台、AGV——无嘉友</td><td><b>部分替代</b>：TT 煤备用出口；第三条跨境铁路 2025-04 开工🟡</td></tr>
+  </table>
+  <div class="note"><b>一句话：</b>蒙古出口的增量正流向嘉友没有资产的集水区（机会成本），而嘉友主场的集水区先到平台期；2027 起国能管道再从主场里抽走直供流量（近期 500 万吨/年=存量划拨，2030 后新矿区 2,000 万吨/年=真增量、首先替代海运煤）。</div>
+
+  <h2>② 非洲侧：铜带四条出海路</h2>
+  <div class="legend">
+    <span><i class="dot" style="background:#1a7f37"></i>嘉友资产</span>
+    <span><i class="dot" style="background:#333"></i>矿山</span>
+    <span><i class="dot" style="background:#7f8c8d"></i>港口</span>
+    <span><i class="sw" style="border-color:#1a7f37"></i>嘉友收费路/口岸</span>
+    <span><i class="sw dash" style="border-color:#c0392b"></i>对手：洛比托铁路 / KMTR</span>
+    <span><i class="sw dash" style="border-color:#e67e22"></i>TAZARA（名义对手·嘉友持股5%）</span>
+    <span><i class="sw" style="border-color:#7f8c8d"></i>公路干线（中性通道）</span>
+    <span><i class="sw dash" style="border-color:#334155"></i>刚果金↔赞比亚 国境线（示意）</span>
+    <span><i class="sw" style="border-color:#7c3aed"></i>洛钼铜出海海运 → IXM 全球分销</span>
+  </div>
+  <div id="mapAF" class="map"></div>
+
+  <table>
+    <tr><th>路线/资产</th><th>拥有者</th><th>现状（2026-07）</th><th>关键时点</th></tr>
+    <tr><td>卡萨 150km 收费路+口岸陆港；萨卡尼亚-恩多拉；莫坎博；迪洛洛 219km（在建）</td><td>嘉友 90%/51%（迪洛洛紫金49%）</td><td>卡萨 2022 收费；萨-恩 2026-02 收费；迪洛洛在建</td><td>莫坎博~2027、迪洛洛~2028</td></tr>
+    <tr><td>洛比托铁路（既有线+赞比亚新建段）</td><td>Trafigura/Mota-Engil/Vecturis；DFC 5.53亿+DBSA 2亿</td><td>12列/周；2025 实运 26.5 万吨；车皮到位 24%；2026 两次断线；赞段未铺</td><td>实质分流最早 2028；460 万吨=2030 后</td></tr>
+    <tr><td>KMTR：Kasomeno-Mwenda 收费路+卢阿普拉大桥</td><td>GED Africa（刚赞各 25 年 PPP）</td><td>2024-06 开工、2025-03 签桥合同</td><td><b>2027-04 通车</b>——绕开 Kasumbalesa 直插达累走廊</td></tr>
+    <tr><td>TAZARA 坦赞铁路</td><td>中国土木 30 年 BOT；<b>嘉友/洛钼/紫金/中远各 5%</b>（公告 2026-006）</td><td>修复期至 2028-09，2026 年中勘察设计收尾</td><td>240 万吨 ≈2031</td></tr>
+    <tr><td>北南走廊（德班公路）/ 鲸湾走廊</td><td>多国公路网；WBCG 推"西北走廊"缩短 235km</td><td>Kasumbalesa 拥堵依旧（1,300 辆/日天花板）</td><td>渐进</td></tr>
+  </table>
+
+  <div class="note"><b>洛钼(CMOC)铜出海去向（核实 2026-07-11）：</b>TFM/KFM 铜以 <b>达累斯萨拉姆 + 德班</b> 两港出海为主【CMOC 官网转载调研·一手】；出海后由 CMOC 贸易臂 <b>IXM 全球分销、主销亚洲(含中国)/欧洲，非整船运回中国某港</b>【IXM 简介·一手】；<b>中国具体到港、分港占比均未披露</b>🟡。嘉友做卡萨走廊清关/收费路/陆港【嘉友公告·一手】，但 <b>"专为洛钼承运"属行业推断</b>——二者唯一有文可查的硬关联是 <b>并列持股 TAZARA 铁路各 5%</b>【MINING.com·二手】。</div>
+
+  <h2>③ 存量与增量：修正后的账（回答"要造这么多路吗"）</h2>
+  <div class="fix"><b>修正记录：</b>上一版拿"金属增量 150–200 万吨"直接对比"铁路运力 700 万吨"，属<b>单位错配</b>。铁路按<b>双向总货运吨位</b>设计：1 吨铜 ≈ 1.0–1.2 吨出境货（电积/阳极≈1:1，精矿≈2:1）+ 约 1 吨进境物资（硫磺/硫酸/炸药/燃油/设备；洛比托 2026-01 单船 5 万吨硫磺进口为实证），另加三国普货。</div>
+  <table>
+    <tr><th>项（🟡估算框架）</th><th>2025</th><th>2030</th></tr>
+    <tr><td>出境矿品货运量（铜+钴氢氧化物+锌）</td><td>~500–550 万吨</td><td>~700–800 万吨</td></tr>
+    <tr><td>进境配套物资</td><td>~400–550 万吨</td><td>~550–700 万吨</td></tr>
+    <tr><td><b>走廊双向总货运（不含普货）</b></td><td><b>~900–1,100 万吨</b></td><td><b>~1,300–1,500 万吨</b></td></tr>
+    <tr><td>铁路目标运力（洛比托 460 + 坦赞 240）</td><td>—</td><td>700 万吨（2030 后口径，含普货）→ 对照总盘并不荒唐</td></tr>
+    <tr><td>铁路实际到位（按跳票史外推）</td><td>~60 万吨</td><td>🟡~200–350 万吨/年</td></tr>
+  </table>
+  <table>
+    <tr><th>时段</th><th>结论</th></tr>
+    <tr><td><b>2030 年前（窗口期）</b></td><td>总货运 +300–400 万吨 vs 铁路实际新增 ~200–300 万吨 → <b>公路绝对量持平或微增</b>，嘉友车流基本盘有支撑。</td></tr>
+    <tr><td><b>2030 年后</b></td><td>若双线达标，铁路 ≈ 总盘一半 → 公路份额实质下降；嘉友价值支柱切换为：迪洛洛（铁路走廊的公路咽喉/备份）+ TAZARA 5% 股权 + 口岸陆港最后一段。<b>反向风险</b>：美欧 vs 中国竞赛式建设 → 运力超前 → 运价战压所有通道定价权。</td></tr>
+  </table>
+
+  <div class="sub" style="margin-top:28px">来源：公司年报/公告、USGS、IEA、Ivanhoe/DFC/TAZARA/LAR 官方发布及项目切片底稿；🟡为估算或二手待核。地图底图 © OpenStreetMap contributors。</div>
+</div>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script>
+const G="#1a7f37", R="#c0392b", O="#e67e22", GY="#7f8c8d", B="#2563eb", K="#333";
+function dot(map,ll,color,label,html){
+  L.circleMarker(ll,{radius:7,color:"#fff",weight:2,fillColor:color,fillOpacity:1}).addTo(map).bindPopup("<b>"+label+"</b><br>"+html);
+  L.marker(ll,{icon:L.divIcon({className:"",html:"<div style='font-size:11.5px;font-weight:600;color:#1f2328;text-shadow:0 0 3px #fff,0 0 3px #fff;white-space:nowrap;transform:translate(10px,-8px)'>"+label+"</div>"})}).addTo(map);
+}
+function line(map,pts,color,dashed,label){
+  L.polyline(pts,{color:color,weight:3.5,opacity:.85,dashArray:dashed?"8 7":null}).addTo(map).bindPopup(label);
+}
+
+/* ---------- 蒙古 ---------- */
+const mn=L.map("mapMN").setView([42.9,105.3],5.5);
+L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",{maxZoom:10,attribution:"© Esri"}).addTo(mn);
+const TT=[43.62,105.45], GS=[42.68,107.45], GM=[41.90,107.30], CK=[42.42,101.05], XBK=[42.75,100.95], NS=[43.05,101.35], MDL=[42.54,110.13], HJ=[42.75,110.05], BT=[40.65,109.85];
+dot(mn,TT,K,"塔本陶勒盖TT","ETT(国企)+MMC(民营·嘉友伙伴)+小TT；蒙古主焦煤主产地");
+dot(mn,NS,K,"纳林苏海图煤田","MAK/南戈壁等——策克的货源，与TT是两个煤田");
+dot(mn,GM,G,"甘其毛都口岸","⭐嘉友主场：仓储/清关/散改集/代买；2025过货4,243万吨(+3.7%,平台期)");
+dot(mn,CK,R,"策克口岸","2025:3,215万吨(+34.9%)；钱归额济纳旗平台/当地物流/AGV——无嘉友");
+dot(mn,MDL,R,"满都拉口岸","+43%(前4月)；包头/达茂旗平台——无嘉友；第三条跨境铁路2025-04开工🟡");
+dot(mn,BT,GY,"包头(甘泉铁路终点方向)","国能甘泉铁路把铁路煤直接接入自有路网");
+line(mn,[TT,GS],GY,false,"TT→嘎顺苏海图铁路(2022通,233.6km,蒙方段)");
+line(mn,[GS,GM],G,false,"短驳20-30km(双挂卡车+AGV)→甘其毛都——嘉友四道钱所在");
+line(mn,[GS,GM,BT],R,true,"2027跨境铁路(宽轨3000万+标轨1000万吨)→国能甘泉铁路：ETT矿山交货$59/吨、20年长协——嘉友无角色");
+line(mn,[NS,XBK,CK],B,false,"纳林苏海图→西伯库伦→策克：另一个集水区，非替代关系");
+line(mn,[TT,HJ,MDL],O,true,"TT→杭吉→满都拉：备用通道(部分替代)，第三条跨境铁路开工🟡");
+
+/* ---------- 非洲 ---------- */
+const af=L.map("mapAF").setView([-13.5,25.5],4.4);
+L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",{maxZoom:9,attribution:"© Esri"}).addTo(af);
+const KAM=[-10.77,25.05], KOL=[-10.72,25.47], TFM=[-10.62,26.20], LUB=[-11.66,27.48], KAS=[-12.26,27.80], SAK=[-12.75,28.55], MOK=[-12.42,28.32], NDO=[-12.97,28.63], DIL=[-10.68,22.34], LOB=[-12.35,13.55], KPM=[-13.97,28.68], DAR=[-6.80,39.28], DBN=[-29.86,31.03], WVB=[-22.96,14.51], KSH=[-12.09,26.40], KMW=[-11.55,28.75];
+dot(af,KAM,K,"Kamoa-Kakula","紫金/Ivanhoe；2025:38.9万吨；已锁洛比托运力12-24万吨→转铁路");
+dot(af,TFM,K,"TFM/KFM(洛阳钼业)","2025:74.1万吨=铜带最大货主；未签LAR，走东南向公路——嘉友的核心过路客户");
+dot(af,KSH,K,"Kansanshi(FQM)","2025:18.1万吨，赞比亚侧");
+dot(af,KOL,GY,"Kolwezi","洛比托铁路装车点；Kamoa第一公里≈0");
+dot(af,KAS,GY,"Kasumbalesa口岸","南线咽喉：设计1,300辆/日，2023排队100km/10天");
+dot(af,SAK,G,"嘉友·卡萨/萨卡尼亚","150km收费路+口岸+陆港(25年特许,2022收费)；赞侧萨-恩多拉17.26km 2026-02收费");
+dot(af,MOK,G,"嘉友·莫坎博口岸","在建，~2027");
+dot(af,DIL,G,"嘉友·迪洛洛(在建)","N39公路219km+陆港，30年特许，紫金49%——卡住洛比托走廊刚果金段公路咽喉");
+dot(af,LOB,GY,"洛比托港",""); dot(af,DAR,GY,"达累斯萨拉姆港",""); dot(af,DBN,GY,"德班港",""); dot(af,WVB,GY,"鲸湾港","");
+line(af,[KOL,DIL,[-11.2,17.8],LOB],R,true,"🔴洛比托铁路(LAR)：Trafigura等30年特许；2025实运26.5万吨/车皮24%/2026两次断线；460万吨=2030后");
+line(af,[KOL,TFM,LUB,KAS],GY,false,"铜带东南向公路干线(TFM/KFM等电积铜)");
+line(af,[KAS,SAK,NDO],G,false,"🟢嘉友承担的物流段：Kasumbalesa分流→卡萨150km收费路(4座收费站)→萨卡尼亚口岸/陆港→恩多拉；做的是清关+收费+仓储(不含前段矿→边境、后段赞→港的公共长途)。TFM/KFM等铜为核心过路货，但'专为洛钼承运'属推断——公司不按客户披露，二者硬关联仅并列持股TAZARA各5%🟡");
+line(af,[LUB,KMW,[-12.5,30.5],[-9.5,33.5],DAR],R,true,"🔴KMTR：Kasomeno-Mwenda收费路+卢阿普拉大桥(GED Africa,2027-04通车)——绕开Kasumbalesa直插达累走廊");
+line(af,[KPM,[-11.5,32.5],[-9.0,34.5],DAR],O,true,"🟠TAZARA(1,860km)：中国土木14亿美元30年BOT；嘉友/洛钼/紫金/中远各5%；240万吨≈2031");
+line(af,[NDO,KPM],GY,false,"赞比亚公路(恩多拉→Kapiri Mposhi=TAZARA装车点)");
+line(af,[KPM,[-15.4,28.3],[-17.9,30.0],[-24.7,29.5],DBN],GY,false,"南线公路→德班(往返40-50天)");
+line(af,[NDO,[-15.4,28.3],[-17.5,24.3],[-20.5,17.2],WVB],GY,false,"鲸湾走廊公路($130/吨最廉，份额小)");
+
+/* 国名大字 + 国境示意线：让"嘉友卡在国境上"一眼可见 */
+function cname(map,ll,text){
+  L.marker(ll,{icon:L.divIcon({className:"",html:"<div style='font-size:17px;font-weight:800;color:#334155;letter-spacing:2px;opacity:.5;white-space:nowrap'>"+text+"</div>"})}).addTo(map);
+}
+cname(af,[-9.7,23.6],"刚果金 DR Congo");
+cname(af,[-14.6,27.2],"赞比亚 Zambia");
+line(af,[[-11.2,24.9],[-11.7,26.4],KAS,SAK,[-13.3,29.8]],"#334155",true,"刚果金↔赞比亚 国境线（示意，真实边界以底图为准）——嘉友卡萨/萨卡尼亚正卡在此线上");
+
+/* 出海海运段（换紫色）：洛钼TFM/KFM铜的去向——经达累斯/德班出海→IXM全球分销，非单一运回中国 */
+function rnote(map,ll,text){
+  L.marker(ll,{icon:L.divIcon({className:"",html:"<div style='font-size:12px;font-weight:700;color:#7c3aed;white-space:nowrap;text-shadow:0 0 3px #fff,0 0 3px #fff'>"+text+"</div>"})}).addTo(map);
+}
+line(af,[DAR,[-8.2,47.5]],"#7c3aed",false,"🟣海运（达累斯萨拉姆出海）→ IXM 全球分销");
+line(af,[DBN,[-25.5,43.5]],"#7c3aed",false,"🟣海运（德班出海）→ IXM 全球分销");
+rnote(af,[-7.6,43.6],"→ 海运 · IXM 全球分销");
+rnote(af,[-10.2,43.6],"主销亚洲(含中国)/欧洲");
+rnote(af,[-12.8,43.6],"🟡中国具体到港未披露");
+</script>
+</body>
+</html>
