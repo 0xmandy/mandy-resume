@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>机器人产业链 · 竞争格局 · 国产替代 · 上游核心零部件</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+  /* ===== 竞争格局专题 专用组件 ===== */
+
+  /* 图例 + origin 分色 */
+  .legend{display:flex;flex-wrap:wrap;gap:10px 18px;margin:22px 0 4px;font-family:var(--mono);font-size:11.5px;color:var(--slate)}
+  .legend .lg{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+  .dot.domestic{background:var(--petrol)}
+  .dot.overseas{background:var(--slate-2)}
+  .dot.jv{background:var(--gold)}
+
+  /* ===== filter bar ===== */
+  .filters{position:sticky;top:54px;z-index:40;background:rgba(244,246,248,.9);backdrop-filter:blur(8px);border:1px solid var(--hair);border-radius:12px;box-shadow:var(--shadow);padding:12px 16px;margin:30px 0 8px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+  .filters .fgroup{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .filters .flabel{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate-2);margin-right:2px}
+  .chipf{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);background:var(--card);border:1px solid var(--hair);border-radius:20px;padding:4px 11px;cursor:pointer;transition:.14s;user-select:none}
+  .chipf:hover{border-color:var(--slate-2)}
+  .chipf.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .filters .fsep{width:1px;align-self:stretch;background:var(--hair);margin:2px 2px}
+  .filters .freset{font-family:var(--mono);font-size:11px;color:var(--amber);cursor:pointer;margin-left:auto;border-bottom:1px dotted var(--amber)}
+  .filters .fstat{font-family:var(--mono);font-size:10.5px;color:var(--slate);width:100%;margin-top:2px}
+
+  /* ===== 三层主图 ===== */
+  .stack{margin:14px 0 8px;display:flex;flex-direction:column;gap:0}
+  .layer{background:var(--card);border:1px solid var(--hair);box-shadow:var(--shadow);position:relative}
+  .layer:first-of-type{border-radius:16px 16px 0 0}
+  .layer:last-of-type{border-radius:0 0 16px 16px}
+  .layer + .layer{border-top:none}
+  .layer .edge{position:absolute;left:0;top:0;height:100%;width:5px}
+  .layer:first-of-type .edge{border-top-left-radius:16px}
+  .layer:last-of-type .edge{border-bottom-left-radius:16px}
+  .layer.down .edge{background:var(--amber)}
+  .layer.mid  .edge{background:var(--petrol)}
+  .layer.up   .edge{background:var(--gold)}
+  .layer .lhead{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding:22px 26px 4px 30px}
+  .layer .lhead .lv{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
+  .layer.down .lhead .lv{color:var(--amber)}
+  .layer.mid  .lhead .lv{color:var(--petrol)}
+  .layer.up   .lhead .lv{color:var(--gold)}
+  .layer .lhead h3{font-size:22px;letter-spacing:-.01em}
+  .layer .lhead .def{font-family:var(--body);font-size:13px;color:var(--slate);margin-left:2px}
+  .layer .lbody{padding:14px 26px 26px 30px}
+
+  /* 环节分组 */
+  .grp{margin-top:20px}
+  .grp:first-child{margin-top:6px}
+  .grp .gk{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--ink);font-weight:600;margin-bottom:4px;display:inline-flex;align-items:center;gap:9px;cursor:default;border-radius:6px;padding:2px 6px;margin-left:-6px;transition:.14s}
+  .grp .gk:hover{background:var(--paper-2)}
+  .grp .gk .cnt{font-family:var(--mono);font-size:10px;color:var(--slate);font-weight:500;background:var(--paper-2);border-radius:20px;padding:1px 7px}
+  .grp .gk .bn{font-size:9.5px;letter-spacing:.06em;color:#fff;background:var(--amber);border-radius:5px;padding:1px 7px;font-weight:500}
+  .grp .gd{font-family:var(--body);font-size:12.5px;color:var(--slate);margin:2px 0 11px;line-height:1.6;max-width:820px}
+  .grp .gd b{color:var(--ink-2);font-weight:600}
+  .grp.empty .gd{color:var(--slate-2);font-style:italic}
+  .nodes{display:flex;flex-wrap:wrap;gap:9px}
+
+  /* ===== 公司节点 chip ===== */
+  .node{position:relative;background:var(--paper);border:1px solid var(--hair);border-left-width:3px;border-radius:10px;padding:9px 13px;min-width:118px;cursor:pointer;transition:opacity .16s,transform .16s,border-color .16s,box-shadow .16s;outline:none}
+  .node[data-origin=domestic]{border-left-color:var(--petrol)}
+  .node[data-origin=overseas]{border-left-color:var(--slate-2)}
+  .node[data-origin=jv]{border-left-color:var(--gold)}
+  .node:hover,.node:focus-visible{border-color:var(--slate-2);background:#fff;transform:translateY(-2px);box-shadow:var(--shadow);z-index:20}
+  .node .t{font-size:14px;font-weight:600;color:var(--ink);line-height:1.25;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .node .tag{font-family:var(--mono);font-size:9px;letter-spacing:.04em;padding:1px 5px;border-radius:4px;border:1px solid var(--hair);color:var(--slate);vertical-align:.06em;white-space:nowrap}
+  .node .tag.head{background:#e6f2f3;border-color:#bcdcdf;color:var(--petrol)}
+  .node .tag.waist{background:var(--paper-2)}
+  .node .tag.startup{background:var(--amber-soft);border-color:#f0c9ba;color:var(--amber)}
+  .node .sub{font-family:var(--mono);font-size:10px;color:var(--slate);margin-top:4px;line-height:1.4}
+  .node .code{color:var(--slate-2)}
+
+  /* 交互态 */
+  .node.dim{opacity:.24}
+  .node.hl{border-color:var(--ink);box-shadow:0 0 0 2px rgba(30,110,120,.35),var(--shadow)}
+  .grp.dim > .gk{opacity:.5}
+
+  /* ===== 抽屉 drawer ===== */
+  .scrim{position:fixed;inset:0;background:rgba(22,24,29,.32);opacity:0;visibility:hidden;transition:.2s;z-index:80}
+  .scrim.open{opacity:1;visibility:visible}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:380px;max-width:90vw;background:var(--card);border-left:1px solid var(--hair);box-shadow:-16px 0 40px rgba(22,24,29,.14);transform:translateX(100%);transition:transform .24s cubic-bezier(.4,0,.2,1);z-index:81;display:flex;flex-direction:column;overflow-y:auto}
+  .drawer.open{transform:none}
+  .drawer .dhead{padding:24px 26px 16px;border-bottom:1px solid var(--hair);position:sticky;top:0;background:var(--card);z-index:2}
+  .drawer .dclose{position:absolute;top:18px;right:20px;font-family:var(--mono);font-size:18px;color:var(--slate);cursor:pointer;line-height:1;border:none;background:none}
+  .drawer .dclose:hover{color:var(--amber)}
+  .drawer h3{font-size:22px;letter-spacing:-.01em;display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding-right:24px}
+  .drawer .dcode{font-family:var(--mono);font-size:12px;color:var(--slate);margin-top:6px}
+  .drawer .dbody{padding:20px 26px 40px}
+  .drawer .row{margin-bottom:18px}
+  .drawer .rk{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate-2);margin-bottom:5px}
+  .drawer .rv{font-size:14.5px;color:var(--ink-2);line-height:1.6}
+  .drawer .rv b{color:var(--ink)}
+  .drawer .pos{background:var(--amber-soft);border-left:3px solid var(--amber);border-radius:0 10px 10px 0;padding:12px 14px;font-size:14px;color:var(--ink-2)}
+  .drawer .peers{display:flex;flex-wrap:wrap;gap:6px}
+  .drawer .peer{font-family:var(--mono);font-size:11px;background:var(--paper);border:1px solid var(--hair);border-radius:16px;padding:3px 10px;color:var(--ink-2);cursor:pointer}
+  .drawer .peer:hover{border-color:var(--slate-2);color:var(--ink)}
+  .drawer .src{background:var(--paper);border:1px solid var(--hair);border-radius:10px;padding:12px 14px;font-family:var(--mono);font-size:11.5px;color:var(--ink-2);line-height:1.6;word-break:break-word}
+  .drawer .src .st{display:inline-block;font-size:9px;letter-spacing:.06em;padding:1px 6px;border-radius:4px;margin-right:6px;vertical-align:.08em}
+  .drawer .src .st.primary{background:#e6f2f3;color:var(--petrol);border:1px solid #bcdcdf}
+  .drawer .src .st.secondary{background:var(--paper-2);color:var(--slate);border:1px solid var(--hair)}
+  .drawer .src .conf{color:var(--slate-2);font-size:10px}
+  /* ---- 投资视角 徽章 + 评分卡 ---- */
+  .grp .gk .iv{font-size:9.5px;letter-spacing:.06em;color:#fff;background:var(--petrol);border-radius:5px;padding:1px 8px;font-weight:600;cursor:pointer}
+  .grp .gk .iv:hover{filter:brightness(1.12)}
+  .drawer .ivdim{display:grid;grid-template-columns:76px 1fr;gap:6px 12px;align-items:start;margin-bottom:14px}
+  .drawer .ivdim .dk{font-family:var(--mono);font-size:11px;color:var(--slate);padding-top:3px;line-height:1.4}
+  .drawer .ivdim .dv .lvl{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;padding:1px 8px;border-radius:5px}
+  .drawer .ivdim .dv .lvl.hi{background:var(--amber-soft);color:var(--amber);border:1px solid #f0c9ba}
+  .drawer .ivdim .dv .lvl.mid{background:var(--paper-2);color:var(--slate);border:1px solid var(--hair)}
+  .drawer .ivdim .dv .lvl.lo{background:#e6f2f3;color:var(--petrol);border:1px solid #bcdcdf}
+  .drawer .ivdim .dv .flag{font-family:var(--mono);font-size:9.5px;color:var(--amber);margin-left:6px}
+  .drawer .ivdim .dv .dn{font-size:12.5px;color:var(--ink-2);line-height:1.55;margin-top:5px}
+  .drawer .ivverdict{background:var(--amber-soft);border-left:3px solid var(--amber);border-radius:0 10px 10px 0;padding:13px 15px;font-size:13.5px;color:var(--ink-2);line-height:1.62}
+  .drawer .ivpick{background:#e6f2f3;border:1px solid #bcdcdf;border-radius:10px;padding:11px 14px;font-size:13px;color:var(--ink-2);line-height:1.6}
+  @media(max-width:520px){.filters{top:0}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="brand">机器人产业知识图谱 · <b>竞争格局</b></div>
+    <nav class="nav">
+      <a href="#map">竞争格局图</a>
+      <a href="../../index.html">← 返回 Mandy 主页</a>
+    </nav>
+  </div>
+</div>
+<div class="ruler"></div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">竞争格局 · 国产替代</div>
+    <h1>机器人产业链<br>竞争格局图 <span class="yr">上游核心零部件</span></h1>
+    <p class="lede">
+      把产业链从<b>「术语概念」</b>推进到<b>「真实玩家」</b>：每个上游核心零部件环节里，
+      <b>谁在打、谁国产谁海外、卡脖子在哪</b>。悬停看竞争、筛选看国产替代、点开看信源——
+      这是一张<b>零财务数字、可追溯到第一手信源</b>的定性竞争格局图。
+    </p>
+    <div class="meta">
+      <span>视角 · <b>环节内竞争格局 + 国产替代</b></span>
+      <span>口径 · <b>定性梯队，无财务硬数字（不过期）</b></span>
+      <span>信源 · <b>每家可点开溯源，一手优先</b></span>
+    </div>
+    <div class="legend">
+      <span class="lg"><span class="dot domestic"></span> 国产</span>
+      <span class="lg"><span class="dot overseas"></span> 海外</span>
+      <span class="lg"><span class="dot jv"></span> 合资</span>
+      <span class="lg">悬停公司看同环节竞品 · 点开看信源 ⌖</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===== 主图 ===== -->
+<section id="map">
+  <div class="wrap">
+    <div class="sechead"><span class="secnum">01</span><h2 class="sectitle">竞争格局图</h2></div>
+    <div class="seclabel">COMPETITIVE LANDSCAPE · DOMESTIC SUBSTITUTION</div>
+    <p class="seclede">
+      沿用三层骨架（下游 → 中游 → 上游），但本图<b>重心在上游核心零部件</b>——那里才是
+      卡脖子与国产替代的主战场。下 / 中游保留骨架、轻挂代表玩家。
+    </p>
+
+    <!-- filter bar (JS 注入) -->
+    <div class="filters" id="filters"></div>
+
+    <!-- 三层主图 (JS 渲染) -->
+    <div class="stack" id="stack"></div>
+
+    <p class="src-inline" style="font-family:var(--mono);font-size:10.5px;color:var(--slate-2);margin-top:14px">
+      注：竞争关系由「同环节成员」自动派生；股权 / 供应关系仅在公开可溯时显式标注。所有断言以每家节点内 source 字段为准。
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>机器人产业知识图谱 · 竞争格局 · 国产替代专题</p>
+    <p class="src">
+      定性竞争格局图，不含财务数字与投资建议。每家公司 / 每条关系的信源见节点抽屉内 source 字段。<br>
+      视觉系统：<a href="base.css">base.css</a>
+    </p>
+  </div>
+</footer>
+
+<!-- 抽屉 -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true"></aside>
+
+<script src="graph-data.js"></script>
+<script>
+(function(){
+  var G = window.GRAPH || {segments:[],companies:[],edges:[]};
+  var LAYERS = [
+    {id:'down', lv:'下游 · Layer 01', name:'应用场景 / 整机', def:'谁在买、买去干什么'},
+    {id:'mid',  lv:'中游 · Layer 02', name:'本体 / 系统集成', def:'把零部件组装成能干活的机器'},
+    {id:'up',   lv:'上游 · Layer 03', name:'核心零部件 / 元器件', def:'卡脖子与国产替代主战场'}
+  ];
+  var ORIGIN_LABEL = {domestic:'国产', overseas:'海外', jv:'合资'};
+  var TIER_LABEL = {head:'头部', waist:'腰部', startup:'初创'};
+  var LISTED_LABEL = {listed:'上市', unlisted:'未上市', subsidiary:'子公司/事业部', acquired:'已被并购'};
+
+  // 索引
+  var segById = {}; G.segments.forEach(function(s){segById[s.id]=s;});
+  var compById = {}; G.companies.forEach(function(c){compById[c.id]=c;});
+  function compsInSeg(segId){ return G.companies.filter(function(c){return (c.segments||[]).indexOf(segId)>=0;}); }
+  function peersOf(c){ // 同环节竞品
+    var set = {};
+    (c.segments||[]).forEach(function(sid){ compsInSeg(sid).forEach(function(o){ if(o.id!==c.id) set[o.id]=true; }); });
+    return Object.keys(set).map(function(id){return compById[id];});
+  }
+
+  // ---- 渲染三层 ----
+  var stack = document.getElementById('stack');
+  LAYERS.forEach(function(L){
+    var segs = G.segments.filter(function(s){return s.layer===L.id;});
+    if(!segs.length) return;
+    var layer = document.createElement('div');
+    layer.className = 'layer '+L.id;
+    var grpHTML = segs.map(function(s){
+      var cs = compsInSeg(s.id);
+      var chips = cs.map(function(c){ return nodeHTML(c); }).join('');
+      var bn = s.bottleneck ? '<span class="bn" title="'+esc(s.bottleneck)+'">卡脖子</span>' : '';
+      var iv = s.invest ? '<span class="iv" data-iv="'+s.id+'">投资视角 →</span>' : '';
+      var cntTxt = cs.length ? '<span class="cnt">'+cs.length+' 家</span>' : '';
+      var body = cs.length
+        ? '<div class="gd">'+esc(s.def||'')+(s.bottleneck?' <b>卡脖子：</b>'+esc(s.bottleneck):'')+'</div><div class="nodes">'+chips+'</div>'
+        : '<div class="gd">'+esc(s.def||'待补玩家清单')+'</div>';
+      return '<div class="grp'+(cs.length?'':' empty')+'" data-seg="'+s.id+'">'
+        + '<div class="gk" data-seg="'+s.id+'">'+esc(s.name)+cntTxt+bn+iv+'</div>'
+        + body + '</div>';
+    }).join('');
+    layer.innerHTML = '<div class="edge"></div>'
+      + '<div class="lhead"><span class="lv">'+L.lv+'</span><h3>'+L.name+'</h3><span class="def">'+L.def+'</span></div>'
+      + '<div class="lbody">'+grpHTML+'</div>';
+    stack.appendChild(layer);
+  });
+
+  function nodeHTML(c){
+    var tier = c.tier ? '<span class="tag '+c.tier+'">'+(TIER_LABEL[c.tier]||c.tier)+'</span>' : '';
+    var code = (c.listed && c.listed.code) ? '<span class="code">'+esc(c.listed.code)+'</span>' : (c.listed?LISTED_LABEL[c.listed.status]||'':'');
+    return '<div class="node" tabindex="0" data-id="'+c.id+'" data-origin="'+(c.origin||'')+'" data-tier="'+(c.tier||'')+'" data-segs="'+(c.segments||[]).join(' ')+'">'
+      + '<div class="t">'+esc(c.name)+tier+'</div>'
+      + '<div class="sub">'+esc(ORIGIN_LABEL[c.origin]||'')+(code?' · '+code:'')+'</div>'
+      + '</div>';
+  }
+
+  // ---- 悬停高亮 ----
+  var nodes = Array.prototype.slice.call(document.querySelectorAll('.node'));
+  function clearHL(){ nodes.forEach(function(n){n.classList.remove('hl','dim');}); }
+  function hoverCompany(id){
+    var c = compById[id]; if(!c) return;
+    var keep = {}; keep[id]=true; peersOf(c).forEach(function(p){keep[p.id]=true;});
+    nodes.forEach(function(n){
+      var nid=n.getAttribute('data-id');
+      n.classList.toggle('hl', nid===id);
+      n.classList.toggle('dim', !keep[nid] && !isFilteredOut(n));
+    });
+  }
+  function hoverSeg(segId){
+    nodes.forEach(function(n){
+      var inSeg = n.getAttribute('data-segs').split(' ').indexOf(segId)>=0;
+      n.classList.toggle('hl', inSeg);
+      n.classList.toggle('dim', !inSeg && !isFilteredOut(n));
+    });
+  }
+  nodes.forEach(function(n){
+    n.addEventListener('mouseenter', function(){ if(!anyFilter()) hoverCompany(n.getAttribute('data-id')); else hoverCompanyWithinFilter(n.getAttribute('data-id')); });
+    n.addEventListener('mouseleave', restore);
+    n.addEventListener('click', function(){ openDrawer(n.getAttribute('data-id')); });
+    n.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();openDrawer(n.getAttribute('data-id'));} });
+  });
+  document.querySelectorAll('.gk[data-seg]').forEach(function(gk){
+    gk.addEventListener('mouseenter', function(){ hoverSeg(gk.getAttribute('data-seg')); });
+    gk.addEventListener('mouseleave', restore);
+  });
+  document.querySelectorAll('.gk .iv').forEach(function(b){
+    b.addEventListener('click', function(e){ e.stopPropagation(); openSegDrawer(b.getAttribute('data-iv')); });
+  });
+  function hoverCompanyWithinFilter(id){
+    var c=compById[id]; if(!c) return; var keep={}; keep[id]=true; peersOf(c).forEach(function(p){keep[p.id]=true;});
+    nodes.forEach(function(n){ var nid=n.getAttribute('data-id'); if(isFilteredOut(n)) return; n.classList.toggle('hl',nid===id); n.classList.toggle('dim',!keep[nid]); });
+  }
+
+  // ---- 筛选 ----
+  var filterState = {origin:{}, tier:{}, seg:{}};
+  function anyFilter(){ return Object.keys(filterState.origin).length||Object.keys(filterState.tier).length||Object.keys(filterState.seg).length; }
+  function isFilteredOut(n){
+    var o=n.getAttribute('data-origin'), t=n.getAttribute('data-tier'), segs=n.getAttribute('data-segs').split(' ');
+    if(Object.keys(filterState.origin).length && !filterState.origin[o]) return true;
+    if(Object.keys(filterState.tier).length && !filterState.tier[t]) return true;
+    if(Object.keys(filterState.seg).length && !segs.some(function(s){return filterState.seg[s];})) return true;
+    return false;
+  }
+  function applyFilter(){
+    var shown=0;
+    nodes.forEach(function(n){ var out=isFilteredOut(n); n.classList.toggle('dim',out); n.classList.remove('hl'); if(!out)shown++; });
+    var stat=document.getElementById('fstat'); if(stat) stat.textContent = anyFilter()? ('筛选中 · 高亮 '+shown+' / '+nodes.length+' 家') : (nodes.length+' 家公司 · 悬停看竞争，点开看信源');
+  }
+  function restore(){ if(anyFilter()) applyFilter(); else clearHL(); var stat=document.getElementById('fstat'); if(stat&&!anyFilter())stat.textContent=nodes.length+' 家公司 · 悬停看竞争，点开看信源'; }
+
+  // filter bar 构建
+  (function buildFilters(){
+    var f=document.getElementById('filters'); if(!f) return;
+    var origins=['domestic','overseas','jv'];
+    var tiers=['head','waist','startup'];
+    var segsWithComp = G.segments.filter(function(s){return compsInSeg(s.id).length;});
+    function group(label, key, items, labelMap){
+      var html='<div class="fgroup"><span class="flabel">'+label+'</span>';
+      html+=items.map(function(it){ return '<span class="chipf" data-fk="'+key+'" data-fv="'+it+'">'+(labelMap[it]||it)+'</span>'; }).join('');
+      return html+'</div>';
+    }
+    f.innerHTML = group('国别','origin',origins,ORIGIN_LABEL)
+      + '<span class="fsep"></span>'
+      + group('梯队','tier',tiers,TIER_LABEL)
+      + '<span class="fsep"></span>'
+      + group('环节','seg',segsWithComp.map(function(s){return s.id;}), (function(){var m={};segsWithComp.forEach(function(s){m[s.id]=s.name;});return m;})())
+      + '<span class="freset" id="freset">清除筛选 ✕</span>'
+      + '<span class="fstat" id="fstat">'+nodes.length+' 家公司 · 悬停看竞争，点开看信源</span>';
+    f.querySelectorAll('.chipf').forEach(function(ch){
+      ch.addEventListener('click', function(){
+        var k=ch.getAttribute('data-fk'), v=ch.getAttribute('data-fv');
+        if(filterState[k][v]){ delete filterState[k][v]; ch.classList.remove('on'); }
+        else { filterState[k][v]=true; ch.classList.add('on'); }
+        anyFilter()?applyFilter():clearHL();
+      });
+    });
+    document.getElementById('freset').addEventListener('click', function(){
+      filterState={origin:{},tier:{},seg:{}};
+      f.querySelectorAll('.chipf.on').forEach(function(c){c.classList.remove('on');});
+      clearHL(); document.getElementById('fstat').textContent=nodes.length+' 家公司 · 悬停看竞争，点开看信源';
+    });
+  })();
+
+  // ---- 抽屉 ----
+  var scrim=document.getElementById('scrim'), drawer=document.getElementById('drawer');
+  function openDrawer(id){
+    var c=compById[id]; if(!c) return;
+    var listed = c.listed||{};
+    var codeLine = (listed.code? listed.code+' · ':'')+(LISTED_LABEL[listed.status]||'');
+    var peers = peersOf(c);
+    var peerHTML = peers.length? peers.map(function(p){return '<span class="peer" data-id="'+p.id+'">'+esc(p.name)+'</span>';}).join('') : '<span style="color:var(--slate-2);font-size:12px">该环节暂无其他已收录玩家</span>';
+    var segNames = (c.segments||[]).map(function(s){return segById[s]?segById[s].name:s;}).join(' · ');
+    var s=c.source||{};
+    var srcTxt = typeof s==='string'? s : ((s.doc||'')+(s.loc?'，'+s.loc:''));
+    var st = c.source_type||(s.type)||'';
+    var conf = c.confidence||(s.confidence)||'';
+    drawer.innerHTML =
+      '<div class="dhead"><button class="dclose" id="dclose" aria-label="关闭">✕</button>'
+      + '<h3>'+esc(c.name)+(c.tier?'<span class="tag '+c.tier+'">'+(TIER_LABEL[c.tier]||c.tier)+'</span>':'')+'</h3>'
+      + '<div class="dcode"><span class="dot '+c.origin+'"></span> '+(ORIGIN_LABEL[c.origin]||'')+(codeLine?' · '+esc(codeLine):'')+'</div></div>'
+      + '<div class="dbody">'
+      + row('所处环节', esc(segNames))
+      + (c.one_liner? row('主营 · 在该环节做什么', esc(c.one_liner)) : '')
+      + (c.position? '<div class="row"><div class="rk">竞争位置</div><div class="pos">'+esc(c.position)+'</div></div>' : '')
+      + '<div class="row"><div class="rk">同环节竞品</div><div class="peers">'+peerHTML+'</div></div>'
+      + '<div class="row"><div class="rk">信源</div><div class="src">'
+        + (st?'<span class="st '+st+'">'+(st==='primary'?'一手':'二手')+'</span>':'')
+        + (conf?'<span class="conf">置信 '+conf+'</span><br>':'')
+        + esc(srcTxt||'—')
+      + '</div></div>'
+      + '</div>';
+    drawer.querySelector('#dclose').addEventListener('click', closeDrawer);
+    drawer.querySelectorAll('.peer').forEach(function(p){ p.addEventListener('click', function(){ openDrawer(p.getAttribute('data-id')); }); });
+    scrim.classList.add('open'); drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false');
+  }
+  function openSegDrawer(segId){
+    var s=segById[segId]; if(!s||!s.invest) return; var iv=s.invest;
+    var dimsHTML=(iv.dims||[]).map(function(d){
+      return '<div class="ivdim"><div class="dk">'+esc(d.k)+'</div>'
+        + '<div class="dv"><span class="lvl '+(d.tone||'mid')+'">'+esc(d.v)+'</span>'
+        + (d.flag?'<span class="flag">⚠'+esc(d.flag)+'</span>':'')
+        + '<div class="dn">'+esc(d.note)+'</div></div></div>';
+    }).join('');
+    drawer.innerHTML =
+      '<div class="dhead"><button class="dclose" id="dclose" aria-label="关闭">✕</button>'
+      + '<h3>'+esc(s.name)+'<span class="tag" style="background:var(--petrol);color:#fff;border-color:var(--petrol)">投资视角</span></h3>'
+      + '<div class="dcode">上游核心零部件 · 评分口径 '+esc(iv.as_of||'')+' · 定性分级，非投资建议</div></div>'
+      + '<div class="dbody">'
+      + dimsHTML
+      + '<div class="row"><div class="rk">综合判断</div><div class="ivverdict">'+esc(iv.verdict)+'</div></div>'
+      + (iv.top_pick?'<div class="row"><div class="rk">首选标的 · 跟踪主线</div><div class="ivpick">'+esc(iv.top_pick)+'</div></div>':'')
+      + (iv.risks?'<div class="row"><div class="rk">主要风险</div><div class="rv">'+esc(iv.risks)+'</div></div>':'')
+      + '<div class="row"><div class="rk">口径</div><div class="src">定性 高/中/低 分级，四维依据 origin 分布 + bottleneck 卡点推导；⚠ 标注处为无一手源、待外部锚定项。无财务硬数字、无买卖评级。</div></div>'
+      + '</div>';
+    drawer.querySelector('#dclose').addEventListener('click', closeDrawer);
+    scrim.classList.add('open'); drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false');
+  }
+  function closeDrawer(){ scrim.classList.remove('open'); drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); }
+  scrim.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeDrawer(); });
+  function row(k,v){ return '<div class="row"><div class="rk">'+k+'</div><div class="rv">'+v+'</div></div>'; }
+
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m];}); }
+
+  // reveal
+  document.querySelectorAll('.layer').forEach(function(el){el.classList.add('rv');});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.08});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+})();
+</script>
+</body>
+</html>

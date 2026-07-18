@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>赵千慧 Mandy Zhao — 投研 AI 系统 · FDE 金融方向</title>
-<meta name="description" content="赵千慧 Mandy Zhao — 中国注册会计师 · 前普华永道 · 前私募投研，投研 AI 系统搭建与 AI 工作流交付作品集">
+<title>赵千慧 Mandy Zhao — AI + 行业研究 · 前私募买方投研</title>
+<meta name="description" content="赵千慧 Mandy Zhao — 中国注册会计师 · 前私募买方投研 · AI 重度使用者，做投资研究与 AI 应用研究的跨界">
 <style>
   :root {
     --ink: #111;
@@ -13,6 +13,8 @@
     --line: #e5e5e5;
     --bg: #fff;
     --chip-bg: #f4f4f4;
+    --accent: #3d4db7;
+    --accent-soft: #e6e9f7;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -132,6 +134,22 @@
     .edu { flex-direction: column; gap: 2px; }
     .nav-inner { gap: 12px; font-size: 13px; overflow-x: auto; }
   }
+
+  /* ---- indigo accent + flat intro (2026-07-18) ---- */
+  .hero h1 { color: var(--accent); }
+  .nav-name { color: var(--accent) !important; }
+  h2 { color: var(--accent); }
+  .contact a { color: var(--accent); border-bottom-color: var(--accent-soft); }
+  .contact a:hover { border-bottom-color: var(--accent); }
+  .nav-inner a:hover { color: var(--accent); }
+  .portfolio-note { border-left-color: var(--accent); }
+  .case .reports a { color: var(--accent); border-bottom-color: var(--accent); }
+  .case .reports a:hover { color: var(--sub); border-bottom-color: var(--sub); }
+  #langBtn { border-color: var(--accent); color: var(--accent); }
+  #langBtn:hover { background: var(--accent); color: #fff; }
+  .hero .intro { margin-top: 26px; max-width: 640px; }
+  .hero .intro p { margin-top: 11px; font-size: 16.5px; color: #2a2a2a; }
+  .hero .intro p strong { color: var(--accent); font-weight: 600; }
 </style>
 </head>
 <body class="lang-zh">
@@ -139,7 +157,7 @@
 <nav>
   <div class="nav-inner">
     <a href="#top" class="nav-name">Mandy Zhao</a>
-    <a href="#portfolio"><span class="zh">作品集</span><span class="en">Portfolio</span></a>
+    <a href="#portfolio"><span class="zh">精选作品</span><span class="en">Work</span></a>
     <a href="#skills"><span class="zh">技能</span><span class="en">Skills</span></a>
     <a href="#experience"><span class="zh">经历</span><span class="en">Experience</span></a>
     <a href="#contact"><span class="zh">联系</span><span class="en">Contact</span></a>
@@ -153,25 +171,25 @@
   <header class="hero">
     <h1><span class="zh">赵千慧</span><span class="en">Mandy Zhao</span> <span style="color:var(--faint);font-weight:400"><span class="zh">Mandy Zhao</span><span class="en">(Qianhui)</span></span></h1>
     <p class="role">
-      <span class="zh">投研 AI 系统搭建 · FDE 金融方向&ensp;|&ensp;中国注册会计师 · 前普华永道 · 前私募投研</span>
-      <span class="en">AI Research Systems · Forward Deployed Engineering (Finance)&ensp;|&ensp;CPA · ex-PwC · ex-PE</span>
+      <span class="zh">AI + 行业研究 · AI 重度使用者&ensp;|&ensp;前私募买方投研 · 中国注册会计师</span>
+      <span class="en">AI + Industry Research · Heavy AI User&ensp;|&ensp;ex-PE Buy-Side Research · CPA (China)</span>
     </p>
-    <p class="hook">
-      <span class="zh">把混乱但高价值的业务问题，<br>变成可靠、可审计的 AI 工作流。</span>
-      <span class="en">I turn messy, high-value business problems<br>into reliable, auditable AI workflows.</span>
-    </p>
-    <div class="lines">
+    <div class="intro">
       <p>
-        <span class="zh"><strong>稀缺组合</strong>：金融领域专业 × 审计合规背景 × 亲手搭建 LLM / RAG 工作流——三样很少出现在同一个人身上。</span>
-        <span class="en"><strong>A rare combination</strong>: financial domain expertise × audit &amp; compliance background × hands-on LLM / RAG workflow building — three things that rarely coexist in one person.</span>
+        <span class="zh">英语专业出身，做投资研究和 AI 应用研究的跨界。</span>
+        <span class="en">An English major working at the intersection of investment research and applied-AI research.</span>
       </p>
       <p>
-        <span class="zh"><strong>擅长场景</strong>：金融、医疗、专业服务等强监管行业的企业客户——每个数字都要有出处，每一步都经得起审计。近半年的交付案例往下翻。</span>
-        <span class="en"><strong>Where I work best</strong>: enterprise customers in regulated industries — finance, healthcare, professional services — where every number needs a source and every step must survive an audit. Recent deliverables below.</span>
+        <span class="zh">探索不同的 IDE 和 AI 模型，产出金融投研 workflow 和网站小工具。</span>
+        <span class="en">I explore different IDEs and AI models, shipping finance-research workflows and small web tools.</span>
       </p>
       <p>
-        <span class="zh"><strong>下一步</strong>：在金融机构搭投研 AI 系统，或做金融方向的 FDE。</span>
-        <span class="en"><strong>Next</strong>: building AI research systems inside a financial institution, or forward-deployed engineering for finance.</span>
+        <span class="zh">做过 crypto/web3 一级投资：找项目方、跟团队沟通调研、参与投资，持续跟进早期项目（例：Sign/EthSign，做链上存证与身份的国家级基础设施）。</span>
+        <span class="en">I've done crypto/web3 early-stage investing — sourcing projects, doing diligence with founding teams, and participating in deals, with ongoing coverage of early projects (e.g. Sign/EthSign, on-chain attestation and identity infrastructure at the national level).</span>
+      </p>
+      <p>
+        <span class="zh">务实导向，观察真实用户的需求和使用工具的痛点，关注技术与工具协同后的场景落地。</span>
+        <span class="en">Pragmatic by default — I watch real users' needs and their pain points with tools, focused on how technology and tooling land in real scenarios.</span>
       </p>
     </div>
     <div class="contact">
@@ -183,99 +201,17 @@
 
   <!-- ================= PORTFOLIO ================= -->
   <section id="portfolio">
-    <h2><span class="zh">作品集 · 案例研究</span><span class="en">Portfolio · Case Studies</span></h2>
+    <h2><span class="zh">精选作品</span><span class="en">Selected Work</span></h2>
 
     <p class="portfolio-note">
-      <span class="zh">这些项目按时间排，跨度差不多半年。AI 工具变化太快——每个案例里的组合，都是当月我跑通、用熟、能交付的选型。换个时间点再做，我会换一套。这正是这份工作有意思的地方。</span>
-      <span class="en">These projects span roughly six months, in chronological order. AI tooling moves fast — the stack in each case is what I had running, mastered, and could deliver with that month. Redo any of them today and I'd pick a different combination. That's exactly what makes this work interesting.</span>
+      <span class="zh">研究 AI 与前沿科技赛道的一件代表作：一张可交互、数据驱动的机器人产业竞争格局图。方法论、信源纪律、可视化都在里面，点开即读。</span>
+      <span class="en">One representative piece from my research on AI and frontier-tech sectors: an interactive, data-driven map of the robotics industry's competitive landscape — methodology, source discipline, and visualization in one, open to read.</span>
     </p>
 
-    <!-- Case 01: 贵金属监控 -->
+    <!-- 机器人产业知识图谱（唯一精选作品） -->
     <article class="case">
       <div class="case-head">
         <span class="case-num">01</span>
-        <span class="case-date">2026.02 · <span class="zh">个人项目</span><span class="en">Personal Project</span></span>
-        <span class="case-cat"><span class="zh">行情 · 自动化</span><span class="en">Markets · Automation</span></span>
-      </div>
-      <h3>
-        <span class="zh">黄金白银价格监控 <span class="metric">— Telegram 全自动推送</span></span>
-        <span class="en">Gold &amp; Silver Price Monitor <span class="metric">— fully automated Telegram alerts</span></span>
-      </h3>
-      <dl>
-        <dt><span class="zh">背景</span><span class="en">BACKGROUND</span></dt>
-        <dd>
-          <span class="zh">贵金属价格波动剧烈，人工盯盘既耗时又容易漏掉关键时点，需要一个 7×24 无人值守的价格监控。</span>
-          <span class="en">Precious-metal prices swing hard; watching quotes manually is time-consuming and misses key moments. I needed 24/7 unattended price monitoring.</span>
-        </dd>
-        <dt><span class="zh">挑战</span><span class="en">CHALLENGE</span></dt>
-        <dd>
-          <span class="zh">免费行情源的稳定性与反爬限制；告警规则要过滤噪音、避免重复轰炸；脚本要在远程服务器上长期稳定自跑。</span>
-          <span class="en">Free market-data sources are unstable and rate-limited; alert rules had to filter noise and avoid duplicate spam; the script had to run unattended on a remote server for the long term.</span>
-        </dd>
-        <dt><span class="zh">方案</span><span class="en">SOLUTION</span></dt>
-        <dd>
-          <span class="zh">Python 脚本定时轮询行情源，按价格阈值与波动幅度触发告警，经 Telegram Bot 推送到手机；部署在境外 VPS 上由 cron 定时驱动，token 等敏感配置全部走环境变量。</span>
-          <span class="en">A Python script polls market-data sources on schedule, triggers alerts on price thresholds and swing magnitude, and pushes to my phone via a Telegram bot; deployed on an overseas VPS driven by cron, with all tokens kept in environment variables.</span>
-        </dd>
-        <dt><span class="zh">价值</span><span class="en">IMPACT</span></dt>
-        <dd>
-          <span class="zh">把「主动盯盘」变成「被动接收」：关键波动第一时间到手机，零人工值守。</span>
-          <span class="en">Turned "actively watching quotes" into "passively receiving alerts": key moves reach my phone instantly, with zero human babysitting.</span>
-        </dd>
-      </dl>
-      <div class="tags">
-        <span class="chip">Python</span>
-        <span class="chip">Telegram Bot API</span>
-        <span class="chip">cron / VPS</span>
-      </div>
-    </article>
-
-    <!-- Case 02: 财报 RAG / A股研究系统 -->
-    <article class="case">
-      <div class="case-head">
-        <span class="case-num">02</span>
-        <span class="case-date">2026.04 – <span class="zh">至今</span><span class="en">Present</span> · <span class="zh">个人项目</span><span class="en">Personal Project</span></span>
-        <span class="case-cat"><span class="zh">金融 · RAG</span><span class="en">Finance · RAG</span></span>
-      </div>
-      <h3>
-        <span class="zh">A股基本面研究系统 <span class="metric">— 财报提取 RAG + 多 Agent 管线</span></span>
-        <span class="en">A-Share Fundamental Research System <span class="metric">— financial-report RAG + multi-agent pipeline</span></span>
-      </h3>
-      <dl>
-        <dt><span class="zh">背景</span><span class="en">BACKGROUND</span></dt>
-        <dd>
-          <span class="zh">A股年报、招股书动辄数百页，人工找口径、对齐同业极其耗时；而直接「跟 AI 聊」得到的数字不可信——投研场景里每个数字都必须可溯源到原始文件。</span>
-          <span class="en">A-share annual reports and prospectuses run hundreds of pages; manually locating figures and aligning peer comparisons is painfully slow. And numbers from "just chatting with AI" can't be trusted — in investment research, every figure must trace back to the source document.</span>
-        </dd>
-        <dt><span class="zh">挑战</span><span class="en">CHALLENGE</span></dt>
-        <dd>
-          <span class="zh">第一手信源纪律（招股书 / 年报 / 公告为据）；同口径的同业对比；数字可回溯；研究过程要沉淀成可复用的流水线，而不是一次性对话。</span>
-          <span class="en">First-hand-source discipline (prospectuses / annual reports / filings only); peer comparisons on consistent definitions; traceable numbers; and a research process that compounds into a reusable pipeline instead of one-off conversations.</span>
-        </dd>
-        <dt><span class="zh">方案</span><span class="en">SOLUTION</span></dt>
-        <dd>
-          <span class="zh">「文件系统即真理」的研究仓库 + 固定 10 问的买方级事实底稿框架；LangGraph 多 Agent 管线分工——确定性工具负责取数与量化计算，LLM Agent 负责撰写，条件边把不合格的稿件打回重写；Streamlit dashboard 公网部署，Telegram 推送兜底。</span>
-          <span class="en">A "filesystem as source of truth" research repo plus a fixed 10-question buy-side fact-sheet framework; a LangGraph multi-agent pipeline with clear separation — deterministic tools handle data retrieval and quantitative computation, LLM agents handle drafting, and conditional edges send substandard drafts back for rewrite; a Streamlit dashboard deployed publicly, with Telegram push as backup.</span>
-        </dd>
-        <dt><span class="zh">价值</span><span class="en">IMPACT</span></dt>
-        <dd>
-          <span class="zh">落地两份完整个股事实底稿（迈威生物 688062、嘉友国际 603871），每个结论附第一手出处；管线复用后，新增覆盖标的只需替换输入。</span>
-          <span class="en">Shipped two complete single-stock fact sheets (Mabwell 688062, Jiayou International 603871), every conclusion backed by a first-hand citation; with the pipeline in place, covering a new company only requires swapping the inputs.</span>
-        </dd>
-      </dl>
-      <div class="tags">
-        <span class="chip">LangGraph</span>
-        <span class="chip">Claude Code</span>
-        <span class="chip">RAG</span>
-        <span class="chip">Streamlit</span>
-        <span class="chip">akshare</span>
-      </div>
-    </article>
-
-    <!-- Case 03: 机器人产业知识图谱 -->
-    <article class="case">
-      <div class="case-head">
-        <span class="case-num">03</span>
         <span class="case-date">2026.06 – <span class="zh">至今</span><span class="en">Present</span> · <span class="zh">个人项目</span><span class="en">Personal Project</span></span>
         <span class="case-cat"><span class="zh">行业研究 · 具身智能</span><span class="en">Industry Research · Embodied AI</span></span>
       </div>
@@ -305,6 +241,9 @@
           <span class="en">Eight HTML research pieces published, plus a reusable framework for analyzing category commercialization; the same "source discipline + AI acceleration" workflow transfers to due diligence and industry research in any hard-tech sector.</span>
         </dd>
       </dl>
+      <div class="reports">
+        <a href="reports/robotics/competitive-landscape.html" target="_blank" rel="noopener"><span class="zh">竞争格局图 · 国产替代（可交互，53 公司 × 8 上游环节）</span><span class="en">Competitive Landscape · Import Substitution (interactive, 53 companies × 8 upstream nodes)</span> <span class="arrow">↗</span></a>
+      </div>
       <div class="tags">
         <span class="chip"><span class="zh">行业研究</span><span class="en">Industry Research</span></span>
         <span class="chip"><span class="zh">一手信源核验</span><span class="en">Primary-Source Verification</span></span>
@@ -313,76 +252,36 @@
       </div>
     </article>
 
-    <!-- Case 04: 买方深度研究 万华 / 嘉友 -->
-    <article class="case">
-      <div class="case-head">
-        <span class="case-num">04</span>
-        <span class="case-date">2026.07 · <span class="zh">个人项目</span><span class="en">Personal Project</span></span>
-        <span class="case-cat"><span class="zh">金融 · 基本面研究</span><span class="en">Finance · Fundamental Research</span></span>
-      </div>
-      <h3>
-        <span class="zh">两份买方级深度底稿 <span class="metric">— 万华化学 · 嘉友国际，可点开读全文</span></span>
-        <span class="en">Two Buy-Side Deep-Dive Reports <span class="metric">— Wanhua Chemical &amp; Jiayou International, full text online</span></span>
-      </h3>
-      <dl>
-        <dt><span class="zh">背景</span><span class="en">BACKGROUND</span></dt>
-        <dd>
-          <span class="zh">光说搭了个研究系统没有说服力，真正能被翻开、被追问的是系统跑出来的完整报告。我挑了两家生意模式截然不同的 A股公司来验证方法论：万华化学（重资产化工制造）和嘉友国际（跨境物流服务）。</span>
-          <span class="en">"We built a research system" convinces no one on its own; what holds up to scrutiny is a full report the system produced. I picked two A-share companies with completely different business models to test the methodology: Wanhua Chemical (asset-heavy chemical manufacturing) and Jiayou International (cross-border logistics).</span>
-        </dd>
-        <dt><span class="zh">挑战</span><span class="en">CHALLENGE</span></dt>
-        <dd>
-          <span class="zh">两个行业的护城河逻辑毫不相通：化工拼的是成本曲线与投产节奏，物流拼的是通道控制与节点卡位。每个判断都得顶住反证——竞争者能否复制、政策生变会怎样、数字对不对得上年报口径。</span>
-          <span class="en">The two industries share no moat logic: chemicals compete on cost curves and capacity-ramp timing, logistics on corridor control and node positioning. Every judgment had to survive counter-evidence — can a rival replicate it, what if policy shifts, do the numbers reconcile to the annual report.</span>
-        </dd>
-        <dt><span class="zh">方案</span><span class="en">SOLUTION</span></dt>
-        <dd>
-          <span class="zh">同一套「固定 10 问 + 第一手信源纪律 + 反证清单」的框架分别落到两家公司。万华拆解了每一次投产究竟把哪项成本压下去的成本演化链条，并与 BASF、科思创、亨斯迈、陶氏做同口径对照；嘉友以铜带多走廊时代的节点价值重画竞争地图，配一张可交互货流地图，把公路、铁路、陆港的角色一次讲清。</span>
-          <span class="en">The same framework — a fixed 10 questions, first-hand-source discipline, and a falsification checklist — was applied to both. For Wanhua I traced the cost-evolution chain of exactly which cost each capacity expansion drove down, benchmarked on consistent definitions against BASF, Covestro, Huntsman, and Dow; for Jiayou I redrew the competitive map around node value in the copper-belt multi-corridor era, with an interactive cargo-flow map laying out the roles of road, rail, and dry ports at a glance.</span>
-        </dd>
-        <dt><span class="zh">价值</span><span class="en">IMPACT</span></dt>
-        <dd>
-          <span class="zh">两份完整买方底稿，每个结论都挂第一手出处（年报、招股书、公告、竞争对手 10-K）。同一框架不挑行业、可复用，是能沉淀下来的研究能力。</span>
-          <span class="en">Two complete buy-side fact sheets, every conclusion tied to a first-hand source (annual reports, prospectuses, filings, competitors' 10-Ks). The same framework is industry-agnostic and reusable — a research capability that compounds.</span>
-        </dd>
-      </dl>
-      <div class="reports">
-        <a href="reports/wanhua/moat.html" target="_blank" rel="noopener"><span class="zh">万华化学 · 低成本护城河</span><span class="en">Wanhua · Low-Cost Moat</span> <span class="arrow">↗</span></a>
-        <a href="reports/jiayou/forward-findings.html" target="_blank" rel="noopener"><span class="zh">嘉友国际 · 前瞻发现</span><span class="en">Jiayou · Forward Findings</span> <span class="arrow">↗</span></a>
-        <a href="reports/jiayou/cargo-flow-map.html" target="_blank" rel="noopener"><span class="zh">嘉友 · 可交互货流地图</span><span class="en">Jiayou · Interactive Cargo-Flow Map</span> <span class="arrow">↗</span></a>
-      </div>
-      <div class="tags">
-        <span class="chip"><span class="zh">基本面研究</span><span class="en">Fundamental Research</span></span>
-        <span class="chip"><span class="zh">一手信源核验</span><span class="en">Primary-Source Verification</span></span>
-        <span class="chip"><span class="zh">同口径对比</span><span class="en">Like-for-Like Benchmarking</span></span>
-        <span class="chip"><span class="zh">数据可视化</span><span class="en">Data Visualization</span></span>
-      </div>
-    </article>
   </section>
 
   <!-- ================= SKILLS ================= -->
   <section id="skills">
     <h2><span class="zh">核心技能</span><span class="en">Core Skills</span></h2>
     <div class="skill-group">
-      <div class="skill-label"><span class="zh">AI 工程与交付</span><span class="en">AI Engineering &amp; Delivery</span></div>
+      <div class="skill-label"><span class="zh">研究与分析</span><span class="en">Research &amp; Analysis</span></div>
       <div class="chips">
-        <span class="chip">RAG</span>
-        <span class="chip">LangGraph</span>
-        <span class="chip"><span class="zh">多 Agent 管线</span><span class="en">Multi-Agent Pipelines</span></span>
-        <span class="chip">Workflow Orchestration</span>
-        <span class="chip">Claude Code / Codex</span>
-        <span class="chip">Python / SQL</span>
-        <span class="chip"><span class="zh">数据可视化</span><span class="en">Data Visualization</span></span>
+        <span class="chip"><span class="zh">行业研究</span><span class="en">Industry Research</span></span>
+        <span class="chip"><span class="zh">专题调研</span><span class="en">Thematic Research</span></span>
+        <span class="chip"><span class="zh">需求研究</span><span class="en">Needs Research</span></span>
+        <span class="chip"><span class="zh">竞争格局分析</span><span class="en">Competitive-Landscape Analysis</span></span>
+        <span class="chip"><span class="zh">一手信源调研</span><span class="en">Primary-Source Research</span></span>
+        <span class="chip"><span class="zh">前瞻与市场判断</span><span class="en">Forward-Looking Market Judgment</span></span>
+        <span class="chip"><span class="zh">结构化框架思维</span><span class="en">Structured Frameworks</span></span>
       </div>
     </div>
     <div class="skill-group">
-      <div class="skill-label"><span class="zh">金融与投研</span><span class="en">Finance &amp; Research</span></div>
+      <div class="skill-label"><span class="zh">投资视角</span><span class="en">Investment Lens</span></div>
       <div class="chips">
-        <span class="chip"><span class="zh">财务尽职调查（FDD）</span><span class="en">Financial Due Diligence</span></span>
-        <span class="chip"><span class="zh">买方投研 · 一手调研</span><span class="en">Buy-side Research · Field Work</span></span>
-        <span class="chip"><span class="zh">财务建模</span><span class="en">Financial Modeling</span></span>
-        <span class="chip"><span class="zh">法定与 IFRS 审计</span><span class="en">Statutory &amp; IFRS Audit</span></span>
-        <span class="chip"><span class="zh">合并报表</span><span class="en">Group Consolidation</span></span>
+        <span class="chip"><span class="zh">买方投研</span><span class="en">Buy-Side Research</span></span>
+        <span class="chip"><span class="zh">一级 / 风投尽调</span><span class="en">Venture / Early-Stage Diligence</span></span>
+        <span class="chip"><span class="zh">财务分析与估值</span><span class="en">Financial Analysis &amp; Valuation</span></span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-label"><span class="zh">AI 应用</span><span class="en">Applied AI</span></div>
+      <div class="chips">
+        <span class="chip"><span class="zh">研究流程封装成可复用 skill / 工作流</span><span class="en">Research → Reusable Skills / Workflows</span></span>
+        <span class="chip"><span class="zh">数据可视化</span><span class="en">Data Visualization</span></span>
       </div>
     </div>
     <div class="skill-group">
@@ -395,7 +294,7 @@
       <div class="skill-label"><span class="zh">语言</span><span class="en">Languages</span></div>
       <div class="chips">
         <span class="chip"><span class="zh">英语 · 雅思 7.5 / 专八</span><span class="en">English · IELTS 7.5 / TEM-8</span></span>
-        <span class="chip"><span class="zh">可对接海外客户 / 开发者</span><span class="en">Engages Overseas Clients / Developers</span></span>
+        <span class="chip"><span class="zh">出海 · 跨文化协作</span><span class="en">Going-Global · Cross-Cultural</span></span>
       </div>
     </div>
   </section>
@@ -407,12 +306,14 @@
     <div class="job">
       <div class="job-date">2022.10 – <span class="zh">至今</span><span class="en">Present</span></div>
       <div class="job-body">
-        <h3><span class="zh">独立投研与 AI 工作流交付</span><span class="en">Independent Research &amp; AI Workflow Delivery</span></h3>
+        <h3><span class="zh">独立研究者（AI 赛道 · 一级投资 · AI 应用）</span><span class="en">Independent Researcher (AI sectors · Early-Stage Investing · Applied AI)</span></h3>
         <div class="org"><span class="zh">上海</span><span class="en">Shanghai</span></div>
         <ul>
-          <li><span class="zh">AI 工作流真实交付：详见上方作品集三个案例。</span><span class="en">Shipped real AI-workflow deliverables — see the three case studies above.</span></li>
-          <li><span class="zh">在 48 小时黑客松中向开源具身智能项目 dimos 提交 PR，编程驱动宇树机器狗按思路运动。</span><span class="en">Contributed a PR to open-source embodied-AI project dimos at a 48-hour hackathon, programming a Unitree robot dog to move as designed.</span></li>
-          <li><span class="zh">深度参与开发者社区：mushanghai 共创者、seapunkclub 完整参与者；数据可视化比赛前三名（$1,000 奖金）。</span><span class="en">Active in developer communities: co-creator of mushanghai, sustained participant in seapunkclub; Top 3 (US$1,000 prize) in a data-visualization competition.</span></li>
+          <li><span class="zh">研究 AI 与前沿科技赛道：自建机器人（具身智能）产业链知识库，已发布 8 篇 HTML 研究；给一位孵化器负责人提供赛道研究和洞察，帮他对接创业者。</span><span class="en">Research AI and frontier-tech sectors: built a robotics (embodied-AI) supply-chain knowledge base from scratch, with 8 HTML research pieces published; provide sector research and insight to an incubator head, helping him connect with founders.</span></li>
+          <li><span class="zh">对接真实产品需求方：泰国客户想从中国采购可自组装的机器人配套件、拿到泰国做成人教育培训收学费；我摸清他的需求，帮他降低从采购到运输的摩擦成本。</span><span class="en">Work directly with the real demand side: a Thai client wanted to source self-assemblable robot kits from China to run paid adult-education training in Thailand; I mapped his needs and cut friction from sourcing through to shipping.</span></li>
+          <li><span class="zh">从不同方向上手 AI：既拿各种 IDE 和大模型做开发、把投研流程搭成团队实际在用的工作流，也在具身智能上给开源项目 dimos 提过 PR、编程驱动宇树机器狗。</span><span class="en">Approach AI from several angles: build with various IDEs and LLMs and turn research processes into workflows a team actually uses; on the embodied-AI side, contributed a PR to open-source project dimos, programming a Unitree robot dog.</span></li>
+          <li><span class="zh">定期和一群同样每月自费上千美元 API 的重度用户交流心得，分享对最新模型的应用和各自做出来的产品。</span><span class="en">Regularly trade notes with a group of heavy users who, like me, spend over a thousand dollars a month on API out of pocket — sharing applications of the latest models and the products each of us builds.</span></li>
+          <li><span class="zh">crypto/web3 一级投资：找项目方、跟团队沟通调研、参与投资，持续跟进早期项目，比如 Sign/EthSign——链上存证与身份的国家级基础设施，已落地吉尔吉斯斯坦、塞拉利昂央行级项目。</span><span class="en">Crypto/web3 early-stage investing: source projects, do diligence with founding teams, participate in deals, and track early projects — e.g. Sign/EthSign, on-chain attestation and identity infrastructure at the national level, deployed in central-bank-grade projects in Kyrgyzstan and Sierra Leone.</span></li>
         </ul>
       </div>
     </div>
@@ -475,8 +376,8 @@
   <footer id="contact">
     <h2><span class="zh">联系方式</span><span class="en">Get in Touch</span></h2>
     <p>
-      <span class="zh">如果你在金融机构搭建投研 AI 系统，或在招聘金融方向的 FDE / 解决方案工程师，欢迎联系。</span>
-      <span class="en">If you're building AI research systems at a financial institution, or hiring finance-focused Forward Deployed Engineers / solutions engineers, I'd love to hear from you.</span>
+      <span class="zh">如果你在做 AI 产品的行业研究 / 投资研究，或在招聘懂买方投研又能用 AI 做工具的人，欢迎聊聊。</span>
+      <span class="en">If you're doing industry / investment research for an AI product, or hiring someone who combines buy-side research with hands-on AI tooling, I'd love to talk.</span>
     </p>
     <div class="contact">
       <span><span class="zh">上海</span><span class="en">Shanghai</span></span>
