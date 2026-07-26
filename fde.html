@@ -324,11 +324,52 @@
     <h2><span class="zh">精选作品</span><span class="en">Selected Work</span></h2>
 
     <p class="portfolio-note">
-      <span class="zh">一件从研究一路做到可交互交付物的代表作：一张数据驱动、信源内联、可点开读的机器人产业竞争格局图。研究方法、信源纪律、工程实现都在里面。</span>
-      <span class="en">One representative piece taken all the way from research to a shipped interactive artifact: a data-driven, source-inlined, clickable map of the robotics industry's competitive landscape — research method, source discipline, and engineering in one.</span>
+      <span class="zh">两件代表作：一个把大模型落成可检索、带出处、可评测的问答系统，一个把研究做成可交互的数据产品。方法、信源纪律、工程实现都在里面。</span>
+      <span class="en">Two representative pieces: one lands an LLM into a retrievable, citation-grounded, measurable Q&amp;A system; the other turns research into an interactive data product — method, source discipline, and engineering in each.</span>
     </p>
 
-    <!-- 机器人产业知识图谱（唯一精选作品） -->
+    <!-- 招股书 RAG 问答 demo -->
+    <article class="case">
+      <div class="case-head">
+        <span class="case-date">2026.07 · <span class="zh">个人项目</span><span class="en">Personal Project</span></span>
+        <span class="case-cat"><span class="zh">AI 工程 · 检索增强生成（RAG）</span><span class="en">AI Engineering · Retrieval-Augmented Generation</span></span>
+      </div>
+      <h3>
+        <span class="zh">招股书 RAG 问答 demo <span class="metric">— 带出处、可评测、有数字防火墙</span></span>
+        <span class="en">Prospectus RAG Q&amp;A Demo <span class="metric">— cited, measurable, with a number firewall</span></span>
+      </h3>
+      <dl>
+        <dt><span class="zh">背景</span><span class="en">BACKGROUND</span></dt>
+        <dd>
+          <span class="zh">一份招股书四百多页，人工找一句话要翻很久。我想把它变成「问一句、带出处答一句」的可检索知识库；同时财务数字必须可信，不能让大模型信口。</span>
+          <span class="en">A prospectus runs 400+ pages; finding one sentence by hand takes ages. I wanted to turn it into a retrievable knowledge base that answers a question with its source attached — while keeping financial figures trustworthy, never left to the model to guess.</span>
+        </dd>
+        <dt><span class="zh">挑战</span><span class="en">CHALLENGE</span></dt>
+        <dd>
+          <span class="zh">大模型容易编造或照抄数字；答案要能溯源到具体页码；改一处参数不能凭感觉说「变好了」，得能量化。</span>
+          <span class="en">LLMs tend to fabricate or blindly copy numbers; answers must trace back to a specific page; and tweaking one parameter can't be called "better" on a hunch — it has to be measured.</span>
+        </dd>
+        <dt><span class="zh">方案</span><span class="en">SOLUTION</span></dt>
+        <dd>
+          <span class="zh">搭了一条完整 RAG 管线：按章节切块（带页码元数据）→ 向量化 → Chroma 向量库 → 检索 top-k → 让 LLM 只照检索到的片段作答、每个结论标（第X节·pY）出处。两道闸是关键：数字防火墙——具体财务数值一律不由 LLM 复述、导向确定性取数工具，杜绝幻觉；评测 harness——人手写 gold 考卷（可答 / 该拦数字 / 该拒答三类），自动量检索命中率、带出处率、数字越界数，用数据迭代而非凭感觉。</span>
+          <span class="en">Built a full RAG pipeline: section-aware chunking (with page metadata) → embeddings → a Chroma vector store → top-k retrieval → an LLM answering only from retrieved fragments, each conclusion tagged with its source (§X·pY). Two gates matter most: a number firewall — specific financial figures are never restated by the LLM but routed to a deterministic data tool, killing hallucination; and an eval harness — a hand-written gold set (answerable / number-firewall / out-of-doc) that auto-measures retrieval hit-rate, citation rate, and number-leakage, so iteration is driven by data, not feel.</span>
+        </dd>
+        <dt><span class="zh">价值</span><span class="en">IMPACT</span></dt>
+        <dd>
+          <span class="zh">初始 gold 集（3 题，覆盖三类）全部达标：检索命中率 100%、数字越界 0。同一套管线换标的只改参数即复用（已在长鑫、宇树两家跑通地基）。这套「检索 + 出处 + 防火墙 + 评测」正是把大模型落进严肃业务、让结果可信可溯源的做法。</span>
+          <span class="en">On the initial gold set (3 questions across all three types): 100% retrieval hit-rate, zero number-leakage, all passing. The same pipeline transfers to a new target by changing parameters (foundations run on two prospectuses so far). This "retrieval + citation + firewall + eval" pattern is exactly how you land an LLM into serious business with trustworthy, traceable output.</span>
+        </dd>
+      </dl>
+      <div class="tags">
+        <span class="chip">RAG</span>
+        <span class="chip">Chroma</span>
+        <span class="chip"><span class="zh">带出处生成</span><span class="en">Citation-Grounded Generation</span></span>
+        <span class="chip"><span class="zh">评测 / eval</span><span class="en">Eval Harness</span></span>
+        <span class="chip"><span class="zh">数字防火墙</span><span class="en">Number Firewall</span></span>
+      </div>
+    </article>
+
+    <!-- 机器人产业知识图谱 -->
     <article class="case">
       <div class="case-head">
         <span class="case-date">2026.06 – <span class="zh">至今</span><span class="en">Present</span> · <span class="zh">个人项目</span><span class="en">Personal Project</span></span>
