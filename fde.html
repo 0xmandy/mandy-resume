@@ -330,17 +330,17 @@
     <article class="case">
       <div class="case-head">
         <span class="case-date">2026.07 · <span class="zh">个人项目</span><span class="en">Personal Project</span></span>
-        <span class="case-cat"><span class="zh">AI 工程 · 多步管线交付</span><span class="en">AI Engineering · Pipeline Delivery</span></span>
+        <span class="case-cat"><span class="zh">工作流 → 交付 · 从 0 到 1 自建</span><span class="en">Workflow → Delivery · Built 0→1</span></span>
       </div>
       <h3>
-        <span class="zh">招股书研读管线 <span class="metric">— 三层架构、数字防火墙、可复现</span></span>
-        <span class="en">Prospectus Research Pipeline <span class="metric">— layered architecture, number firewall, reproducible</span></span>
+        <span class="zh">招股书研读管线 <span class="metric">— 从零搭到端到端跑通、可复用的交付</span></span>
+        <span class="en">Prospectus Research Pipeline <span class="metric">— built 0→1, runs end-to-end, reusable delivery</span></span>
       </h3>
       <dl>
         <dt><span class="zh">背景</span><span class="en">BACKGROUND</span></dt>
         <dd>
-          <span class="zh">一份招股书三四百页（做过的两家分别是 410 页、369 页），人工精读并核对每个财务数字要好几天。我要把它做成一条「输入 PDF、输出可追溯理解文档」的可复用管线——换一家公司只改参数，系统本体不动。</span>
-          <span class="en">A prospectus runs 300–400+ pages (the two I ran were 410 and 369); reading it closely and verifying every financial figure by hand takes days. I set out to build a reusable pipeline that takes a PDF in and produces a source-traceable analysis document out — swap the company by changing parameters, the system itself untouched.</span>
+          <span class="zh">一份招股书三四百页（做过的两家分别是 410 页、369 页），人工精读并核对每个财务数字要好几天。手上没有现成工具，我从一张白纸把它搭成一条「输入 PDF、输出可追溯理解文档」的可复用管线——换一家公司只改参数，系统本体不动。</span>
+          <span class="en">A prospectus runs 300–400+ pages (the two I ran were 410 and 369); reading it closely and verifying every financial figure by hand takes days. With no off-the-shelf tool to start from, I built it from a blank page into a reusable pipeline that takes a PDF in and produces a source-traceable analysis document out — swap the company by changing parameters, the system itself untouched.</span>
         </dd>
         <dt><span class="zh">挑战</span><span class="en">CHALLENGE</span></dt>
         <dd>
@@ -354,16 +354,17 @@
         </dd>
         <dt><span class="zh">价值</span><span class="en">IMPACT</span></dt>
         <dd>
-          <span class="zh">两家端到端跑通。其中一家：脚本独立复算 32 项派生指标，凡招股书有披露值可交叉校验的 5 项（营收复合增速、两类产品单价、募资合计、综合毛利率）全部一致；其余 27 项是招股书没披露、由脚本自算（每台毛利、按行业出货算的市占率、人均创收等）。同一次复算还撞出招股书自身一处会计差错更正的遗留——一张对比表把 2024 营收印成 39,237.06，与正文的 39,277.07 差约 40 万元。换标的只改参数、skill 本体不动。这套「确定性取数 + 数字防火墙 + 人工门 + 可复现」正是把大模型落进严肃业务、让结果可信可交付的做法。</span>
-          <span class="en">Runs end-to-end on two prospectuses. On one: the scripts independently recompute 32 derived metrics; the 5 that have a disclosed value to cross-check against (revenue CAGR, unit prices for two product lines, total fundraising, blended gross margin) all match, while the other 27 are figures the prospectus never disclosed and the scripts derive (per-unit gross profit, market share against industry shipments, revenue-per-head, and so on). The same recompute also surfaced a leftover accounting-error correction in the prospectus itself — one comparison table printed 2024 revenue as 39,237.06 versus 39,277.07 in the main text, a ~400k-yuan gap. Swapping the target only changes parameters; the skill itself stays put. This "deterministic extraction + number firewall + human gates + reproducibility" pattern is exactly how you land an LLM into serious business with trustworthy, deliverable output.</span>
+          <span class="zh">从零到端到端跑通，已在两家真招股书上完整交付（长鑫 410 页、宇树 369 页），各自产出可追溯的理解文档，换标的只改参数即复用——这是一条能重复交付的工作流，不是一次性 demo。可信度上有硬证据托底：脚本独立复算 32 项派生指标，凡招股书有披露值可交叉校验的 5 项（营收复合增速、两类产品单价、募资合计、综合毛利率）全部一致，其余 27 项是招股书没披露、由脚本自算；同一次复算还撞出招股书自身一处会计差错更正的遗留——一张对比表把 2024 营收印成 39,237.06、与正文的 39,277.07 差约 40 万元。这套「确定性取数 + 数字防火墙 + 人工门 + 可复现」正是把大模型落进严肃业务、能反复交付可信结果的做法。</span>
+          <span class="en">From zero to running end-to-end, it has delivered in full on two real prospectuses (410 and 369 pages), each producing a source-traceable analysis document, and transfers to a new target by only changing parameters — a workflow that delivers repeatably, not a one-off demo. The credibility is backed by hard evidence: the scripts independently recompute 32 derived metrics; the 5 that have a disclosed value to cross-check against (revenue CAGR, unit prices for two product lines, total fundraising, blended gross margin) all match, while the other 27 are figures the prospectus never disclosed and the scripts derive. The same recompute also surfaced a leftover accounting-error correction in the prospectus itself — one comparison table printed 2024 revenue as 39,237.06 versus 39,277.07 in the main text, a ~400k-yuan gap. This "deterministic extraction + number firewall + human gates + reproducibility" pattern is exactly how you land an LLM into serious business and deliver trustworthy results, repeatedly.</span>
         </dd>
       </dl>
       <div class="tags">
+        <span class="chip"><span class="zh">端到端交付</span><span class="en">End-to-end Delivery</span></span>
+        <span class="chip"><span class="zh">从 0 到 1 自建</span><span class="en">Built 0→1</span></span>
         <span class="chip">Claude Code skill</span>
         <span class="chip"><span class="zh">数字防火墙</span><span class="en">Number Firewall</span></span>
         <span class="chip"><span class="zh">确定性取数</span><span class="en">Deterministic Extraction</span></span>
         <span class="chip"><span class="zh">三层架构 skill·agent·script</span><span class="en">Layered Architecture</span></span>
-        <span class="chip"><span class="zh">可复现管线</span><span class="en">Reproducible Pipeline</span></span>
       </div>
     </article>
 
