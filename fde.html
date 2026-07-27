@@ -322,9 +322,50 @@
     <h2><span class="zh">精选作品</span><span class="en">Selected Work</span></h2>
 
     <p class="portfolio-note">
-      <span class="zh">两件代表作：一个把大模型落成可检索、带出处、可评测的问答系统，一个把研究做成可交互的数据产品。方法、信源纪律、工程实现都在里面。</span>
-      <span class="en">Two representative pieces: one lands an LLM into a retrievable, citation-grounded, measurable Q&amp;A system; the other turns research into an interactive data product — method, source discipline, and engineering in each.</span>
+      <span class="zh">三件代表作：一条把招股书落成可追溯理解文档的多步管线，一个带出处、可评测的问答系统，一个可交互的数据产品。方法、信源纪律、工程实现都在里面。</span>
+      <span class="en">Three representative pieces: a multi-step pipeline that turns a prospectus into a source-traceable analysis document; a citation-grounded, measurable Q&amp;A system; and an interactive data product — method, source discipline, and engineering in each.</span>
     </p>
+
+    <!-- 招股书研读管线 -->
+    <article class="case">
+      <div class="case-head">
+        <span class="case-date">2026.07 · <span class="zh">个人项目</span><span class="en">Personal Project</span></span>
+        <span class="case-cat"><span class="zh">AI 工程 · 多步管线交付</span><span class="en">AI Engineering · Pipeline Delivery</span></span>
+      </div>
+      <h3>
+        <span class="zh">招股书研读管线 <span class="metric">— 三层架构、数字防火墙、可复现</span></span>
+        <span class="en">Prospectus Research Pipeline <span class="metric">— layered architecture, number firewall, reproducible</span></span>
+      </h3>
+      <dl>
+        <dt><span class="zh">背景</span><span class="en">BACKGROUND</span></dt>
+        <dd>
+          <span class="zh">一份招股书三四百页（做过的两家分别是 410 页、369 页），人工精读并核对每个财务数字要好几天。我要把它做成一条「输入 PDF、输出可追溯理解文档」的可复用管线——换一家公司只改参数，系统本体不动。</span>
+          <span class="en">A prospectus runs 300–400+ pages (the two I ran were 410 and 369); reading it closely and verifying every financial figure by hand takes days. I set out to build a reusable pipeline that takes a PDF in and produces a source-traceable analysis document out — swap the company by changing parameters, the system itself untouched.</span>
+        </dd>
+        <dt><span class="zh">挑战</span><span class="en">CHALLENGE</span></dt>
+        <dd>
+          <span class="zh">大模型一碰数字就容易编造或串列；每条证据都要能溯源到具体页码或一手年报；整条链路要可复现、能自检，不能靠人肉逐行复核。</span>
+          <span class="en">The moment an LLM touches numbers it tends to fabricate or misalign them; every piece of evidence must trace to a specific page or a primary annual report; and the whole chain has to be reproducible and self-checking, not reliant on line-by-line human proofreading.</span>
+        </dd>
+        <dt><span class="zh">方案</span><span class="en">SOLUTION</span></dt>
+        <dd>
+          <span class="zh">三层架构——skill（说明书 + 谁干路由表）/ agent（编排 6 阶段、做归类与可比性判断、卡人工确认门）/ script（确定性工具，同输入同输出）。6 阶段：下载 → 按章节忠实提取 → 跨源补齐竞对与行业增速 → 数据层（确定性取数 + 版本化公式算派生指标）→ 主题归集 → 理解文档。核心是数字防火墙：数字只走 PDF → 确定性提取 → raw-facts.csv → compute_metrics.py → metrics.csv → 只读模板，LLM 全程只引用 metric ID、碰不到字面数字；再加 4 道人工确认门 + 输出含未登记数字一律打回的自检。</span>
+          <span class="en">A three-layer architecture — skill (the spec plus a routing table), agent (orchestrates six stages, judges classification and comparability, holds the human-confirmation gates), and script (deterministic tools, same input → same output). Six stages: download → faithful section-by-section extraction → cross-source competitor and industry-growth data → a data layer (deterministic figure extraction plus versioned formulas computing derived metrics) → thematic consolidation → the analysis document. The core is a number firewall: figures flow only through PDF → deterministic extraction → raw-facts.csv → compute_metrics.py → metrics.csv → read-only templates; the LLM only ever references a metric ID and never touches a literal number, backed by four human-confirmation gates and a self-check that rejects any output containing an unregistered figure.</span>
+        </dd>
+        <dt><span class="zh">价值</span><span class="en">IMPACT</span></dt>
+        <dd>
+          <span class="zh">两家端到端跑通。其中一家：脚本独立复算 32 项派生指标，凡招股书有披露值可交叉校验的 5 项（营收复合增速、两类产品单价、募资合计、综合毛利率）全部一致；其余 27 项是招股书没披露、由脚本自算（每台毛利、按行业出货算的市占率、人均创收等）。同一次复算还撞出招股书自身一处会计差错更正的遗留——一张对比表把 2024 营收印成 39,237.06，与正文的 39,277.07 差约 40 万元。换标的只改参数、skill 本体不动。这套「确定性取数 + 数字防火墙 + 人工门 + 可复现」正是把大模型落进严肃业务、让结果可信可交付的做法。</span>
+          <span class="en">Runs end-to-end on two prospectuses. On one: the scripts independently recompute 32 derived metrics; the 5 that have a disclosed value to cross-check against (revenue CAGR, unit prices for two product lines, total fundraising, blended gross margin) all match, while the other 27 are figures the prospectus never disclosed and the scripts derive (per-unit gross profit, market share against industry shipments, revenue-per-head, and so on). The same recompute also surfaced a leftover accounting-error correction in the prospectus itself — one comparison table printed 2024 revenue as 39,237.06 versus 39,277.07 in the main text, a ~400k-yuan gap. Swapping the target only changes parameters; the skill itself stays put. This "deterministic extraction + number firewall + human gates + reproducibility" pattern is exactly how you land an LLM into serious business with trustworthy, deliverable output.</span>
+        </dd>
+      </dl>
+      <div class="tags">
+        <span class="chip">Claude Code skill</span>
+        <span class="chip"><span class="zh">数字防火墙</span><span class="en">Number Firewall</span></span>
+        <span class="chip"><span class="zh">确定性取数</span><span class="en">Deterministic Extraction</span></span>
+        <span class="chip"><span class="zh">三层架构 skill·agent·script</span><span class="en">Layered Architecture</span></span>
+        <span class="chip"><span class="zh">可复现管线</span><span class="en">Reproducible Pipeline</span></span>
+      </div>
+    </article>
 
     <!-- 招股书 RAG 问答 demo -->
     <article class="case">
